@@ -1,6 +1,8 @@
 'use client';
 
 import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Menu, User, Globe, Zap } from 'lucide-react';
 import { Logo } from './Logo';
 
@@ -17,6 +19,28 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
     mobileMenuOpen,
     setMobileMenuOpen
 }) => {
+    const pathname = usePathname();
+
+    const getTabHref = (tab: string) => {
+        switch (tab) {
+            case 'online':
+                return '/online';
+            case 'stays':
+                return '/';
+            case 'experiences':
+                return '/experiences';
+            default:
+                return '/';
+        }
+    };
+
+    const isActiveTab = (tab: string) => {
+        if (tab === 'online' && pathname === '/online') return true;
+        if (tab === 'stays' && pathname === '/') return true;
+        if (tab === 'experiences' && pathname === '/experiences') return true;
+        return activeTab === tab; // fallback to your original logic
+    };
+
     return (
         <div className="flex justify-between items-center h-16 lg:h-20">
             <Logo />
@@ -24,19 +48,20 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
             {/* Center Navigation Tabs - Hidden on mobile */}
             <div className="hidden lg:flex items-center bg-white/70 backdrop-blur-md rounded-full p-1.5 border border-sky-200/50 shadow-lg">
                 {['stays', 'experiences', 'online'].map((tab) => (
-                    <button
+                    <Link
                         key={tab}
-                        className={`px-6 py-2.5 text-sm font-medium rounded-full transition-all duration-300 capitalize relative ${activeTab === tab
+                        href={getTabHref(tab)}
+                        className={`px-6 py-2.5 text-sm font-medium rounded-full transition-all duration-300 capitalize relative ${isActiveTab(tab)
                             ? 'bg-gradient-to-r from-sky-500 to-sky-600 text-white shadow-lg transform scale-105'
                             : 'text-gray-600 hover:text-sky-700 hover:bg-white/80 hover:shadow-md'
                             }`}
                         onClick={() => setActiveTab(tab)}
                     >
-                        {tab === 'online' ? 'Online Experiences' : tab}
-                        {activeTab === tab && (
+                        {tab === 'online' ? 'Services' : tab}
+                        {isActiveTab(tab) && (
                             <div className="absolute inset-0 bg-gradient-to-r from-sky-500 to-sky-600 rounded-full blur opacity-50 animate-pulse"></div>
                         )}
-                    </button>
+                    </Link>
                 ))}
             </div>
 
