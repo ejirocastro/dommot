@@ -1,0 +1,1 @@
+export { getBadgeColor } from './badgeColors';
