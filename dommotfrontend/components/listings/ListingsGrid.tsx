@@ -1,74 +1,104 @@
+/**
+ * ListingsGrid Component
+ * 
+ * Main container component that organizes and displays property listings grouped by categories.
+ * Handles data transformation, category-based organization, and state management coordination
+ * between parent and child components. Provides the primary layout structure for the
+ * listings display with responsive design and load more functionality.
+ * 
+ * Key Features:
+ * - Dynamic listing categorization and grouping
+ * - State management propagation to child components
+ * - Category-based listing organization with horizontal scrolling
+ * - Load more functionality for pagination
+ * - Responsive container with max-width constraints
+ * - Proper z-index layering for overlay elements
+ * 
+ * @author Dommot Development Team
+ * @version 1.0.0
+ */
+
 'use client';
 
 import React from 'react';
-import { ListingCard } from './ListingCard';
+import { CategoryRow } from './CategoryRow';
 import { LoadMoreButton } from './LoadMoreButton';
-import { Listing } from '../../types';
+import { Listing, Category } from '../../types';
 
+/**
+ * ListingsGridProps - Props interface for the ListingsGrid component
+ * 
+ * @interface ListingsGridProps
+ * @property {Listing[]} listings - Array of all property listings to display
+ * @property {Category[]} categories - Array of category definitions for organization
+ * @property {Record<number, number>} currentImageIndex - Image indices for all listings
+ * @property {function} setCurrentImageIndex - State setter for image index updates
+ * @property {Set<number>} favorites - Set of favorited listing IDs
+ * @property {function} setFavorites - State setter for favorites management
+ */
 interface ListingsGridProps {
     listings: Listing[];
+    categories: Category[];
     currentImageIndex: Record<number, number>;
     setCurrentImageIndex: React.Dispatch<React.SetStateAction<Record<number, number>>>;
     favorites: Set<number>;
     setFavorites: React.Dispatch<React.SetStateAction<Set<number>>>;
 }
 
+/**
+ * ListingsGrid - Main listings display and organization container
+ * 
+ * Manages the display of property listings organized by categories. Handles
+ * data transformation, state coordination, and provides the main layout
+ * structure for the listings interface.
+ * 
+ * @param {ListingsGridProps} props - Component props containing listings, categories, and state
+ * @returns {JSX.Element} Rendered listings grid component
+ */
 export const ListingsGrid: React.FC<ListingsGridProps> = ({
     listings,
+    categories,
     currentImageIndex,
     setCurrentImageIndex,
     favorites,
     setFavorites
 }) => {
-    const handleImageNext = (listingId: number) => {
-        setCurrentImageIndex(prev => {
-            const listing = listings.find(l => l.id === listingId);
-            if (!listing) return prev;
-            const current = prev[listingId] || 0;
-            const next = current >= listing.images.length - 1 ? 0 : current + 1;
-            return { ...prev, [listingId]: next };
-        });
-    };
-
-    const handleImagePrev = (listingId: number) => {
-        setCurrentImageIndex(prev => {
-            const listing = listings.find(l => l.id === listingId);
-            if (!listing) return prev;
-            const current = prev[listingId] || 0;
-            const prev_index = current <= 0 ? listing.images.length - 1 : current - 1;
-            return { ...prev, [listingId]: prev_index };
-        });
-    };
-
-    const toggleFavorite = (listingId: number) => {
-        setFavorites(prev => {
-            const newFavorites = new Set(prev);
-            if (newFavorites.has(listingId)) {
-                newFavorites.delete(listingId);
-            } else {
-                newFavorites.add(listingId);
-            }
-            return newFavorites;
-        });
-    };
+    /**
+     * Transform flat listings array into category-grouped object
+     * Creates efficient lookup structure for category-based rendering
+     */
+    const listingsByCategory = listings.reduce((acc, listing) => {
+        if (!acc[listing.category]) {
+            acc[listing.category] = [];
+        }
+        acc[listing.category].push(listing);
+        return acc;
+    }, {} as Record<string, Listing[]>);
 
     return (
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-8 relative z-10">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6 lg:gap-8">
-                {listings.map((listing, index) => (
-                    <ListingCard
-                        key={listing.id}
-                        listing={listing}
-                        index={index}
-                        currentImageIndex={currentImageIndex[listing.id] || 0}
-                        isFavorite={favorites.has(listing.id)}
-                        onImageNext={() => handleImageNext(listing.id)}
-                        onImagePrev={() => handleImagePrev(listing.id)}
-                        onToggleFavorite={() => toggleFavorite(listing.id)}
+        // Main content container with responsive padding and z-index for layering
+        <main className="max-w-7xl mx-auto py-6 lg:py-8 relative z-10">
+            {/* Dynamic category row generation */}
+            {categories.map((category) => {
+                const categoryListings = listingsByCategory[category.name] || []; // Default to empty array if no listings
+                return (
+                    <CategoryRow
+                        key={category.name}
+                        categoryName={category.name}
+                        categoryIcon={category.icon}
+                        listings={categoryListings}
+                        currentImageIndex={currentImageIndex}
+                        setCurrentImageIndex={setCurrentImageIndex}
+                        favorites={favorites}
+                        setFavorites={setFavorites}
                     />
-                ))}
+                );
+            })}
+            
+            {/* Load more button section with responsive spacing */}
+            <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
+                <LoadMoreButton />
             </div>
-            <LoadMoreButton />
         </main>
     );
 };

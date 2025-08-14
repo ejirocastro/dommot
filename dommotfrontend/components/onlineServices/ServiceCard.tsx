@@ -27,10 +27,14 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
 }) => {
     return (
         <div
-            className="group cursor-pointer transform hover:scale-105 transition-all duration-500"
-            style={{ animationDelay: `${index * 100}ms` }}
+            className="group cursor-pointer transition-all duration-700 ease-out hover:-translate-y-2"
+            style={{ 
+                animationDelay: `${index * 150}ms`,
+                opacity: 0,
+                animation: 'fadeInUp 0.8s ease-out forwards'
+            }}
         >
-            <div className="relative overflow-hidden rounded-2xl mb-3 shadow-lg hover:shadow-2xl transition-all duration-500">
+            <div className="relative overflow-hidden rounded-3xl mb-6 bg-white shadow-sm hover:shadow-xl transition-all duration-700 ease-out border border-gray-100/50">
                 <ServiceImage
                     service={service}
                     currentImageIndex={currentImageIndex}

@@ -28,7 +28,7 @@ const ServiceImage: React.FC<ServiceImageProps> = ({
 
             {/* Badge */}
             <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm ${getBadgeColor(service.badge)}`}>
-                {service.badge}
+                {service.badge.charAt(0).toUpperCase() + service.badge.slice(1)}
             </div>
 
             {/* Navigation Buttons */}

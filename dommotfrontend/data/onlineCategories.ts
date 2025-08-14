@@ -12,5 +12,7 @@ export const onlineCategories: OnlineCategory[] = [
   { id: 9, name: 'Wine Pairing', icon: '🍷', isActive: false },
   { id: 10, name: 'Hot Stone', icon: '🪨', isActive: false },
   { id: 11, name: 'Aromatherapy', icon: '🕯️', isActive: false },
-  { id: 12, name: 'Couples', icon: '💑', isActive: false }
+  { id: 12, name: 'Couples', icon: '💑', isActive: false },
+  { id: 13, name: 'Yacht Rentals', icon: '🛥️', isActive: false },
+  { id: 14, name: 'Boat Rentals', icon: '⛵', isActive: false }
 ];

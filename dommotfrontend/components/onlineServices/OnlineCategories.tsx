@@ -8,9 +8,9 @@ interface OnlineCategoriesProps {
 
 const OnlineCategories: React.FC<OnlineCategoriesProps> = ({ categories }) => {
     return (
-        <div className="flex items-center space-x-4 lg:space-x-8 overflow-x-auto scrollbar-hide">
+        <div className="flex items-center space-x-2 lg:space-x-4 overflow-x-auto scrollbar-hide">
             {categories.map((category) => (
-                <OnlineCategoryItem key={category.name} category={category} />
+                <OnlineCategoryItem key={category.id} category={category} />
             ))}
         </div>
     );

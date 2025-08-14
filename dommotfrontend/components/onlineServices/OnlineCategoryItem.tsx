@@ -8,18 +8,22 @@ interface OnlineCategoryItemProps {
 const OnlineCategoryItem: React.FC<OnlineCategoryItemProps> = ({ category }) => {
     return (
         <button
-            className={`flex flex-col items-center space-y-2 p-4 rounded-xl transition-all duration-300 hover:bg-sky-50 hover:scale-110 ${
-                category.isActive ? 'bg-sky-100 scale-105' : 'hover:bg-gray-50'
+            className={`flex flex-col items-center space-y-2 px-4 py-3 rounded-2xl transition-all duration-500 ease-out hover:-translate-y-0.5 ${
+                category.isActive 
+                    ? 'bg-black text-white shadow-lg' 
+                    : 'hover:bg-gray-50 text-gray-600 hover:text-black'
             }`}
         >
-            <div className="text-2xl">{category.icon}</div>
-            <span className={`text-sm font-medium whitespace-nowrap ${
-                category.isActive ? 'text-sky-700' : 'text-gray-700'
+            <div className="text-xl">{category.icon}</div>
+            <span className={`text-xs font-medium whitespace-nowrap tracking-wide ${
+                category.isActive ? 'text-white' : ''
             }`}>
                 {category.name}
             </span>
             {category.count && (
-                <span className="text-xs text-gray-500">({category.count})</span>
+                <span className={`text-xs ${category.isActive ? 'text-gray-300' : 'text-gray-400'}`}>
+                    ({category.count})
+                </span>
             )}
         </button>
     );

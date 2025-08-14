@@ -5,3 +5,4 @@ export { ListingInfo } from './ListingInfo';
 export { FavoriteButton } from './FavoriteButton';
 export { ImageIndicators } from './ImageIndicators';
 export { LoadMoreButton } from './LoadMoreButton';
+export { CategoryRow } from './CategoryRow';
