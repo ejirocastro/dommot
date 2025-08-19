@@ -5,3 +5,4 @@ export * from './footer';
 export * from './mobile';
 export * from './common';
 export * from './onlineServices';
+export * from './chat';

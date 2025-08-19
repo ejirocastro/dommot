@@ -80,3 +80,35 @@ code {
 html {
   scroll-behavior: smooth;
 }
+
+/* Chat animations */
+@keyframes slideInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.chat-window-enter {
+  animation: slideInUp 0.3s ease-out;
+}
+
+.chat-toggle-pulse {
+  animation: pulse 2s infinite;
+}

@@ -25,7 +25,8 @@ import {
     ListingsGrid,
     Footer,
     MobileMenu,
-    AnimatedBackground
+    AnimatedBackground,
+    ChatAssistant
 } from './components';
 import { useScrollPosition } from './hooks';
 import { categories, listings } from './data';
@@ -102,6 +103,9 @@ const DommotHomePage: React.FC = () => {
                 mobileMenuOpen={mobileMenuOpen}
                 setMobileMenuOpen={setMobileMenuOpen}
             />
+
+            {/* AI Chat Assistant */}
+            <ChatAssistant />
         </div>
     );
 };
