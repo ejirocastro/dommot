@@ -45,11 +45,11 @@ interface ListingInfoProps {
 export const ListingInfo: React.FC<ListingInfoProps> = ({ listing }) => {
     return (
         // Main information container with vertical spacing
-        <div className="space-y-1">
+        <div className="space-y-3 px-3 py-4">
             {/* Title and Rating Row */}
             <div className="flex justify-between items-start">
                 {/* Property title with hover effect */}
-                <h3 className="font-semibold text-gray-900 group-hover:text-sky-800 transition-colors duration-300">
+                <h3 className="font-semibold text-gray-900 group-hover:text-sky-800 transition-colors duration-300 leading-relaxed">
                     {listing.title}
                 </h3>
                 
@@ -61,13 +61,13 @@ export const ListingInfo: React.FC<ListingInfoProps> = ({ listing }) => {
             </div>
             
             {/* Distance/Location information */}
-            <p className="text-sm text-gray-500">{listing.distance}</p>
+            <p className="text-sm text-gray-500 leading-relaxed">{listing.distance}</p>
             
             {/* Availability date information */}
-            <p className="text-sm text-gray-500">{listing.date}</p>
+            <p className="text-sm text-gray-500 leading-relaxed">{listing.date}</p>
             
             {/* Price and Badge Row */}
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-between pt-2">
                 {/* Price display with Nigerian Naira currency */}
                 <div className="flex items-baseline space-x-1">
                     <span className="font-semibold text-gray-900">₦{listing.price.toLocaleString()}</span>

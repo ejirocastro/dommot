@@ -8,14 +8,14 @@ interface ServiceInfoProps {
 
 const ServiceInfo: React.FC<ServiceInfoProps> = ({ service }) => {
     return (
-        <div className="space-y-4 px-2">
+        <div className="space-y-4 px-4 py-4">
             <div className="space-y-3">
-                <h3 className="font-medium text-gray-900 text-lg leading-tight tracking-tight group-hover:text-black transition-colors duration-500 line-clamp-2">
+                <h3 className="font-medium text-gray-900 text-lg leading-relaxed tracking-tight group-hover:text-black transition-colors duration-500 line-clamp-2">
                     {service.title}
                 </h3>
                 
                 <div className="flex items-center justify-between">
-                    <p className="text-gray-600 font-normal text-base">{service.provider}</p>
+                    <p className="text-gray-600 font-normal text-base leading-relaxed">{service.provider}</p>
                     <div className="flex items-center space-x-1.5 flex-shrink-0">
                         <Star className="w-4 h-4 fill-black text-black" />
                         <span className="text-sm font-medium text-gray-900">{service.rating}</span>
@@ -24,7 +24,7 @@ const ServiceInfo: React.FC<ServiceInfoProps> = ({ service }) => {
                 </div>
             </div>
 
-            <div className="flex items-center space-x-6 text-sm text-gray-500">
+            <div className="flex items-center space-x-6 text-sm text-gray-500 leading-relaxed">
                 <div className="flex items-center space-x-2">
                     <Clock className="w-4 h-4" />
                     <span>{service.duration}</span>

@@ -72,11 +72,11 @@ export const ListingCard: React.FC<ListingCardProps> = ({
     return (
         // Main card container with hover effects and staggered animation timing
         <div
-            className="group cursor-pointer transform hover:scale-105 transition-all duration-500"
+            className="group cursor-pointer transform hover:scale-[1.02] transition-all duration-500"
             style={{ animationDelay: `${index * 100}ms` }} // Staggered entrance animation
         >
             {/* Image section container with overlay elements */}
-            <div className="relative overflow-hidden rounded-2xl mb-3 shadow-lg hover:shadow-2xl transition-all duration-500">
+            <div className="relative overflow-hidden rounded-2xl mb-3 shadow-lg hover:shadow-2xl hover:shadow-sky-500/25 transition-all duration-500">
                 {/* Main image carousel component */}
                 <ListingImage
                     listing={listing}

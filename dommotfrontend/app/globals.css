@@ -112,3 +112,15 @@ html {
 .chat-toggle-pulse {
   animation: pulse 2s infinite;
 }
+
+/* Enhanced card hover effects */
+.card-hover-shadow {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-hover-shadow:hover {
+  box-shadow: 
+    0 20px 25px -5px rgba(0, 0, 0, 0.1), 
+    0 10px 10px -5px rgba(0, 0, 0, 0.04),
+    0 0 0 1px rgba(59, 130, 246, 0.05);
+}

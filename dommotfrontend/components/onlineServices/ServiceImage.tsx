@@ -22,7 +22,7 @@ const ServiceImage: React.FC<ServiceImageProps> = ({
             <img
                 src={service.images[currentImageIndex]}
                 alt={service.title}
-                className="w-full h-64 sm:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 

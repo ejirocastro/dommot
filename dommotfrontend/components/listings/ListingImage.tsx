@@ -63,7 +63,7 @@ export const ListingImage: React.FC<ListingImageProps> = ({
             <img
                 src={listing.images[currentImageIndex]}
                 alt={listing.title}
-                className="w-full h-64 sm:h-72 object-cover group-hover:scale-110 transition-transform duration-700"
+                className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
             />
             
             {/* Gradient overlay for improved contrast on hover */}
