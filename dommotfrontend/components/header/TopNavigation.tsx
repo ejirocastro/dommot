@@ -20,11 +20,12 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Menu, User, Globe, Zap } from 'lucide-react';
+import { Globe, Zap, Menu } from 'lucide-react';
 import { Logo } from './Logo';
+import { UserMenu } from './UserMenu';
 
 /**
  * TopNavigationProps - Props interface for the TopNavigation component
@@ -60,6 +61,9 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
 }) => {
     // Get current pathname for active tab detection
     const pathname = usePathname();
+    
+    // State for user dropdown menu
+    const [userMenuOpen, setUserMenuOpen] = useState(false);
 
     /**
      * Maps navigation tabs to their corresponding route paths
@@ -137,20 +141,20 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
                 <button className="p-3 hover:bg-sky-50 rounded-full transition-all duration-300 hover:shadow-lg">
                     <Globe className="w-5 h-5 text-sky-700" />
                 </button>
-                
-                {/* User menu button with mobile menu toggle functionality */}
+
+                {/* Mobile menu toggle button - Mobile only */}
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                    className="flex items-center space-x-2 border-2 border-sky-200/50 rounded-full p-2 hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-sky-300"
+                    className="lg:hidden p-3 hover:bg-sky-50 rounded-full transition-all duration-300 hover:shadow-lg"
                 >
-                    {/* Hamburger menu icon */}
-                    <Menu className="w-4 h-4 text-sky-700" />
-                    
-                    {/* User avatar with gradient background */}
-                    <div className="w-8 h-8 bg-gradient-to-r from-sky-500 to-sky-600 rounded-full flex items-center justify-center shadow-lg">
-                        <User className="w-4 h-4 text-white" />
-                    </div>
+                    <Menu className="w-5 h-5 text-sky-700" />
                 </button>
+                
+                {/* User dropdown menu */}
+                <UserMenu 
+                    isOpen={userMenuOpen} 
+                    setIsOpen={setUserMenuOpen} 
+                />
             </div>
         </div>
     );
