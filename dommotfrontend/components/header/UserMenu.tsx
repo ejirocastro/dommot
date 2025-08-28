@@ -94,7 +94,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
         { icon: Plane, label: 'Trips', href: '#' },
         
         // Communication Section
-        { icon: MessageSquare, label: 'Messages', href: '#', divider: true },
+        { icon: MessageSquare, label: 'Messages', href: '/messages', divider: true },
         { icon: Bell, label: 'Notifications', href: '#' },
         
         // Account Section

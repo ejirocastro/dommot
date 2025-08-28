@@ -6,3 +6,4 @@ export * from './onlineService';
 export * from './onlineCategory';
 export * from './chat';
 export * from './experience';
+export * from './message';

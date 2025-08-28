@@ -44,40 +44,34 @@ interface ListingInfoProps {
  */
 export const ListingInfo: React.FC<ListingInfoProps> = ({ listing }) => {
     return (
-        // Main information container with vertical spacing
-        <div className="space-y-3 px-3 py-4">
+        // Main information container with vertical spacing - reduced for Airbnb-like compactness
+        <div className="space-y-1.5 px-3 py-3">
             {/* Title and Rating Row */}
             <div className="flex justify-between items-start">
-                {/* Property title with hover effect */}
-                <h3 className="font-semibold text-gray-900 group-hover:text-sky-800 transition-colors duration-300 leading-relaxed">
+                {/* Property title with hover effect - reduced font size */}
+                <h3 className="text-sm font-medium text-gray-900 group-hover:text-sky-800 transition-colors duration-300 leading-snug truncate pr-2">
                     {listing.title}
                 </h3>
-                
-                {/* Star rating display */}
-                <div className="flex items-center space-x-1 ml-2">
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                    <span className="text-sm font-medium text-gray-700">{listing.rating}</span>
+
+                {/* Star rating display - slightly smaller */}
+                <div className="flex items-center space-x-0.5 ml-2 flex-shrink-0">
+                    <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                    <span className="text-xs font-medium text-gray-700">{listing.rating}</span>
                 </div>
             </div>
-            
-            {/* Distance/Location information */}
-            <p className="text-sm text-gray-500 leading-relaxed">{listing.distance}</p>
-            
-            {/* Availability date information */}
-            <p className="text-sm text-gray-500 leading-relaxed">{listing.date}</p>
-            
+
             {/* Price and Badge Row */}
-            <div className="flex items-center justify-between pt-2">
-                {/* Price display with Nigerian Naira currency */}
+            <div className="flex items-center justify-between pt-1">
+                {/* Price display with Nigerian Naira currency - slightly smaller */}
                 <div className="flex items-baseline space-x-1">
-                    <span className="font-semibold text-gray-900">₦{listing.price.toLocaleString()}</span>
-                    <span className="text-sm text-gray-500">night</span>
+                    <span className="text-sm font-semibold text-gray-900">₦{listing.price.toLocaleString()}</span>
+                    <span className="text-xs text-gray-500">night</span>
                 </div>
-                
-                {/* Conditional Guest Favorite Badge */}
+
+                {/* Conditional Guest Favorite Badge - smaller text */}
                 {listing.isGuestFavorite && (
-                    <div className="flex items-center space-x-1">
-                        <Award className="w-4 h-4 text-sky-600" />
+                    <div className="flex items-center space-x-0.5">
+                        <Award className="w-3.5 h-3.5 text-sky-600" />
                         <span className="text-xs font-medium text-sky-600">Guest favorite</span>
                     </div>
                 )}

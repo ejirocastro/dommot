@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Clock, Users } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { OnlineService } from '@/types';
 
 interface ServiceInfoProps {
@@ -8,39 +8,30 @@ interface ServiceInfoProps {
 
 const ServiceInfo: React.FC<ServiceInfoProps> = ({ service }) => {
     return (
-        <div className="space-y-4 px-4 py-4">
-            <div className="space-y-3">
-                <h3 className="font-medium text-gray-900 text-lg leading-relaxed tracking-tight group-hover:text-black transition-colors duration-500 line-clamp-2">
+        // Main information container - simplified to match listing pattern
+        <div className="space-y-1.5 px-3 py-3">
+            {/* Title and Rating Row */}
+            <div className="flex justify-between items-start">
+                {/* Service title with hover effect - reduced font size */}
+                <h3 className="text-sm font-medium text-gray-900 group-hover:text-sky-800 transition-colors duration-300 leading-snug truncate pr-2">
                     {service.title}
                 </h3>
-                
-                <div className="flex items-center justify-between">
-                    <p className="text-gray-600 font-normal text-base leading-relaxed">{service.provider}</p>
-                    <div className="flex items-center space-x-1.5 flex-shrink-0">
-                        <Star className="w-4 h-4 fill-black text-black" />
-                        <span className="text-sm font-medium text-gray-900">{service.rating}</span>
-                        <span className="text-sm text-gray-500">({service.reviews})</span>
-                    </div>
+
+                {/* Star rating display - slightly smaller */}
+                <div className="flex items-center space-x-0.5 ml-2 flex-shrink-0">
+                    <Star className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" />
+                    <span className="text-xs font-medium text-gray-700">{service.rating}</span>
                 </div>
             </div>
 
-            <div className="flex items-center space-x-6 text-sm text-gray-500 leading-relaxed">
-                <div className="flex items-center space-x-2">
-                    <Clock className="w-4 h-4" />
-                    <span>{service.duration}</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                    <Users className="w-4 h-4" />
-                    <span>{service.deliveryTime}</span>
-                </div>
-            </div>
-
-            <div className="pt-3 border-t border-gray-100">
+            {/* Price Row - simplified like listings */}
+            <div className="flex items-center justify-between pt-1">
+                {/* Price display with currency */}
                 <div className="flex items-baseline space-x-1">
-                    <span className="font-semibold text-gray-900 text-xl tracking-tight">
+                    <span className="text-sm font-semibold text-gray-900">
                         {service.currency}{service.currency === '₦' ? service.price.toLocaleString() : service.price}
                     </span>
-                    <span className="text-gray-500 font-normal">per service</span>
+                    <span className="text-xs text-gray-500">per service</span>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@ const ServiceCategoryRow: React.FC<ServiceCategoryRowProps> = ({
     // Check scroll position and update arrow visibility
     const checkScrollPosition = () => {
         if (!scrollContainerRef.current) return;
-        
+
         const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
         setCanScrollLeft(scrollLeft > 0);
         setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
@@ -41,11 +41,11 @@ const ServiceCategoryRow: React.FC<ServiceCategoryRowProps> = ({
     // Smooth scroll function
     const scrollTo = (direction: 'left' | 'right') => {
         if (!scrollContainerRef.current || isScrolling) return;
-        
+
         setIsScrolling(true);
         const container = scrollContainerRef.current;
         const scrollAmount = container.clientWidth * 0.8; // Scroll 80% of visible width
-        const targetScroll = direction === 'left' 
+        const targetScroll = direction === 'left'
             ? container.scrollLeft - scrollAmount
             : container.scrollLeft + scrollAmount;
 
@@ -73,7 +73,7 @@ const ServiceCategoryRow: React.FC<ServiceCategoryRowProps> = ({
 
     const handleTouchEnd = () => {
         if (!touchStart || !touchEnd) return;
-        
+
         const distance = touchStart - touchEnd;
         const isLeftSwipe = distance > 50;
         const isRightSwipe = distance < -50;
@@ -149,9 +149,8 @@ const ServiceCategoryRow: React.FC<ServiceCategoryRowProps> = ({
                 {/* Left Arrow */}
                 <button
                     onClick={() => scrollTo('left')}
-                    className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${
-                        canScrollLeft ? 'opacity-0 group-hover:opacity-100' : 'opacity-0 pointer-events-none'
-                    }`}
+                    className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${canScrollLeft ? 'opacity-0 group-hover:opacity-100' : 'opacity-0 pointer-events-none'
+                        }`}
                     aria-label="Scroll left"
                 >
                     <ChevronLeft className="w-5 h-5 text-gray-700" />
@@ -160,16 +159,15 @@ const ServiceCategoryRow: React.FC<ServiceCategoryRowProps> = ({
                 {/* Right Arrow */}
                 <button
                     onClick={() => scrollTo('right')}
-                    className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${
-                        canScrollRight ? 'opacity-0 group-hover:opacity-100' : 'opacity-0 pointer-events-none'
-                    }`}
+                    className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${canScrollRight ? 'opacity-0 group-hover:opacity-100' : 'opacity-0 pointer-events-none'
+                        }`}
                     aria-label="Scroll right"
                 >
                     <ChevronRight className="w-5 h-5 text-gray-700" />
                 </button>
 
                 {/* Scrolling Container */}
-                <div 
+                <div
                     ref={scrollContainerRef}
                     className="overflow-x-auto scrollbar-hide scroll-smooth"
                     onTouchStart={handleTouchStart}
@@ -178,9 +176,9 @@ const ServiceCategoryRow: React.FC<ServiceCategoryRowProps> = ({
                 >
                     <div className="flex gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 pb-2">
                         {services.map((service, index) => (
-                            <div 
-                                key={service.id} 
-                                className="flex-shrink-0 w-64 sm:w-72 lg:w-80"
+                            <div
+                                key={service.id}
+                                className="flex-shrink-0 w-56 sm:w-60 lg:w-64" // Reduced card widths to match listings
                             >
                                 <ServiceCard
                                     service={service}

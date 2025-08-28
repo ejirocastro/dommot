@@ -59,38 +59,38 @@ export const ListingImage: React.FC<ListingImageProps> = ({
     return (
         // Image container with relative positioning for overlays
         <div className="relative">
-            {/* Main property image with hover zoom effect */}
+            {/* Main property image with hover zoom effect - reduced aspect ratio for compactness */}
             <img
                 src={listing.images[currentImageIndex]}
                 alt={listing.title}
-                className="w-full aspect-[4/3] object-cover group-hover:scale-105 transition-transform duration-700"
+                className="w-full aspect-[5/4] object-cover group-hover:scale-105 transition-transform duration-500"
             />
-            
+
             {/* Gradient overlay for improved contrast on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-            {/* Property type badge with dynamic color coding */}
-            <div className={`absolute top-3 left-3 px-2 py-1 rounded-full text-xs font-semibold shadow-lg backdrop-blur-sm ${getBadgeColor(listing.badge)}`}>
+            {/* Property type badge with dynamic color coding - smaller for compact design */}
+            <div className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-medium shadow-md backdrop-blur-sm ${getBadgeColor(listing.badge)}`}>
                 {listing.badge}
             </div>
 
-            {/* Image Navigation Controls - Show on hover */}
+            {/* Image Navigation Controls - Show on hover - smaller buttons */}
             {/* Previous image button */}
             <button
                 onClick={onImagePrev}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 p-1.5 bg-white/90 backdrop-blur-sm rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
                 aria-label="Previous image"
             >
-                <ChevronLeft className="w-4 h-4 text-gray-800" />
+                <ChevronLeft className="w-3.5 h-3.5 text-gray-800" />
             </button>
-            
+
             {/* Next image button */}
             <button
                 onClick={onImageNext}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 p-2 bg-white/90 backdrop-blur-sm rounded-full shadow-lg opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 p-1.5 bg-white/90 backdrop-blur-sm rounded-full shadow-md opacity-0 group-hover:opacity-100 transition-all duration-300 hover:bg-white hover:scale-110"
                 aria-label="Next image"
             >
-                <ChevronRight className="w-4 h-4 text-gray-800" />
+                <ChevronRight className="w-3.5 h-3.5 text-gray-800" />
             </button>
         </div>
     );

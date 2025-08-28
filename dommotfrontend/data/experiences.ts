@@ -349,6 +349,404 @@ export const experiences: Experience[] = [
       avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
       isVerified: true
     }
+  },
+
+  // Additional Restaurants
+  {
+    id: 15,
+    images: [
+      "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1511081692775-05d0f180a065?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=400&h=300&fit=crop"
+    ],
+    title: "Amala & Ewedu at Bukka House",
+    location: "Surulere, Lagos",
+    category: "Restaurants",
+    duration: "1-2 hours",
+    price: 6000,
+    rating: 4.8,
+    reviewCount: 312,
+    badge: "Local Favorite",
+    description: "Authentic Yoruba cuisine in a traditional setting",
+    highlights: ["Traditional recipes", "Local atmosphere", "Fresh ingredients", "Cultural dining"],
+    availableSlots: ["12:00 PM", "2:00 PM", "4:00 PM", "6:00 PM"],
+    host: {
+      name: "Mama Bukka",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 16,
+    images: [
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=400&h=300&fit=crop"
+    ],
+    title: "Continental Buffet at Eko Hotel",
+    location: "Victoria Island, Lagos",
+    category: "Restaurants",
+    duration: "2-3 hours",
+    price: 35000,
+    rating: 4.7,
+    reviewCount: 189,
+    badge: "Premium",
+    description: "Luxurious buffet experience with international cuisine",
+    highlights: ["International buffet", "Ocean views", "Premium service", "Live cooking stations"],
+    availableSlots: ["7:00 PM", "8:00 PM", "9:00 PM"],
+    host: {
+      name: "Eko Hotel Team",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 17,
+    images: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544148103-0773bf10d330?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559329007-40df8b9345d8?w=400&h=300&fit=crop"
+    ],
+    title: "Jollof Rice Masterclass",
+    location: "Ikeja, Lagos",
+    category: "Restaurants",
+    duration: "3 hours",
+    price: 15000,
+    rating: 4.9,
+    reviewCount: 245,
+    badge: "Popular",
+    description: "Learn to cook authentic Nigerian Jollof rice from experts",
+    highlights: ["Hands-on cooking", "Traditional techniques", "Take home recipes", "Cultural stories"],
+    availableSlots: ["10:00 AM", "2:00 PM", "5:00 PM"],
+    host: {
+      name: "Chef Ngozi",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+
+  // Additional Clubs & Nightlife
+  {
+    id: 18,
+    images: [
+      "https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1574391884720-bbc428f851b5?w=400&h=300&fit=crop"
+    ],
+    title: "Skybar 37 VIP Experience",
+    location: "Victoria Island, Lagos",
+    category: "Clubs & Nightlife",
+    duration: "4-5 hours",
+    price: 80000,
+    rating: 4.8,
+    reviewCount: 167,
+    badge: "Premium",
+    description: "Exclusive rooftop bar with 360-degree city views",
+    highlights: ["Panoramic views", "Craft cocktails", "VIP service", "City lights"],
+    availableSlots: ["8:00 PM", "9:00 PM", "10:00 PM"],
+    host: {
+      name: "Skybar Management",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 19,
+    images: [
+      "https://images.unsplash.com/photo-1493225457124-a3eb161ffa5f?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1574391884720-bbc428f851b5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop"
+    ],
+    title: "Live Jazz at Freedom Park",
+    location: "Lagos Island, Lagos",
+    category: "Clubs & Nightlife",
+    duration: "3 hours",
+    price: 12000,
+    rating: 4.6,
+    reviewCount: 198,
+    badge: "Local Favorite",
+    description: "Intimate jazz performances in a historic setting",
+    highlights: ["Live jazz music", "Historic venue", "Cultural atmosphere", "Outdoor setting"],
+    availableSlots: ["7:00 PM", "8:30 PM"],
+    host: {
+      name: "Freedom Park Team",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+
+  // Additional Adventure & Nature
+  {
+    id: 20,
+    images: [
+      "https://images.unsplash.com/photo-1501436513145-30f24e19fcc4?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop"
+    ],
+    title: "Hiking at Aso Rock",
+    location: "Abuja, FCT",
+    category: "Adventure & Nature",
+    duration: "5-6 hours",
+    price: 22000,
+    rating: 4.7,
+    reviewCount: 134,
+    badge: "Popular",
+    description: "Challenging hike up Nigeria's iconic Aso Rock with guided tour",
+    highlights: ["Rock climbing", "City panorama", "Photography spots", "Expert guides"],
+    availableSlots: ["6:00 AM", "7:00 AM"],
+    host: {
+      name: "Adventure Guides FCT",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 21,
+    images: [
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop"
+    ],
+    title: "Badagry Beach Horseback Riding",
+    location: "Badagry, Lagos",
+    category: "Adventure & Nature",
+    duration: "2-3 hours",
+    price: 28000,
+    rating: 4.8,
+    reviewCount: 156,
+    badge: "Premium",
+    description: "Scenic horseback riding along historic Badagry coastline",
+    highlights: ["Beach riding", "Historic sites", "Professional instruction", "Sunset rides"],
+    availableSlots: ["9:00 AM", "4:00 PM", "5:30 PM"],
+    host: {
+      name: "Badagry Stables",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+
+  // Additional Cultural Tours
+  {
+    id: 22,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
+    ],
+    title: "Royal Palace of Benin Tour",
+    location: "Benin City, Edo",
+    category: "Cultural Tours",
+    duration: "4 hours",
+    price: 18000,
+    rating: 4.9,
+    reviewCount: 87,
+    badge: "Popular",
+    description: "Explore the ancient kingdom's royal palace and artifacts",
+    highlights: ["Royal artifacts", "Ancient history", "Traditional architecture", "Cultural performances"],
+    availableSlots: ["10:00 AM", "2:00 PM"],
+    host: {
+      name: "Benin Heritage Guide",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 23,
+    images: [
+      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop"
+    ],
+    title: "Kano City Ancient Walls Tour",
+    location: "Kano, Kano State",
+    category: "Cultural Tours",
+    duration: "3.5 hours",
+    price: 16000,
+    rating: 4.7,
+    reviewCount: 92,
+    badge: "Popular",
+    description: "Walk through centuries-old city walls and traditional markets",
+    highlights: ["Ancient walls", "Traditional markets", "Islamic architecture", "Local crafts"],
+    availableSlots: ["9:00 AM", "2:00 PM", "4:00 PM"],
+    host: {
+      name: "Kano Tourism Board",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+
+  // Additional Food & Drink
+  {
+    id: 24,
+    images: [
+      "https://images.unsplash.com/photo-1551218808-94e220e084d2?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559329007-40df8b9345d8?w=400&h=300&fit=crop"
+    ],
+    title: "Pepper Soup & Palm Wine Tasting",
+    location: "Nsukka, Enugu",
+    category: "Food & Drink",
+    duration: "2.5 hours",
+    price: 9000,
+    rating: 4.8,
+    reviewCount: 167,
+    badge: "Local Favorite",
+    description: "Authentic Igbo cuisine and traditional palm wine experience",
+    highlights: ["Traditional preparation", "Local ingredients", "Cultural stories", "Rural setting"],
+    availableSlots: ["12:00 PM", "3:00 PM", "5:00 PM"],
+    host: {
+      name: "Nsukka Village Tours",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 25,
+    images: [
+      "https://images.unsplash.com/photo-1559329007-40df8b9345d8?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1565299624946-b28f40a0ca4b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1567521464027-f127ff144326?w=400&h=300&fit=crop"
+    ],
+    title: "Lagos Island Food Crawl",
+    location: "Lagos Island, Lagos",
+    category: "Food & Drink",
+    duration: "5 hours",
+    price: 25000,
+    rating: 4.9,
+    reviewCount: 203,
+    badge: "Popular",
+    description: "Comprehensive food tour covering Lagos Island's best eateries",
+    highlights: ["Multiple restaurants", "Diverse cuisines", "Local favorites", "Food history"],
+    availableSlots: ["11:00 AM", "2:00 PM"],
+    host: {
+      name: "Lagos Food Tours",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+
+  // Additional Entertainment
+  {
+    id: 26,
+    images: [
+      "https://images.unsplash.com/photo-1574391884720-bbc428f851b5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?w=400&h=300&fit=crop"
+    ],
+    title: "Afrobeats Concert Experience",
+    location: "National Theatre, Lagos",
+    category: "Entertainment",
+    duration: "4 hours",
+    price: 45000,
+    rating: 4.9,
+    reviewCount: 278,
+    badge: "Popular",
+    description: "Live Afrobeats concert with top Nigerian artists",
+    highlights: ["Live performances", "Top artists", "Cultural venue", "VIP access"],
+    availableSlots: ["7:00 PM", "8:00 PM"],
+    host: {
+      name: "Lagos Entertainment",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 27,
+    images: [
+      "https://images.unsplash.com/photo-1566737236500-c8ac43014a8e?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1574391884720-bbc428f851b5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571115764595-644a1f56a55c?w=400&h=300&fit=crop"
+    ],
+    title: "Stand-up Comedy Workshop",
+    location: "Victoria Island, Lagos",
+    category: "Entertainment",
+    duration: "3 hours",
+    price: 20000,
+    rating: 4.6,
+    reviewCount: 145,
+    badge: "Popular",
+    description: "Learn stand-up comedy from professional comedians",
+    highlights: ["Comedy techniques", "Performance practice", "Professional tips", "Small groups"],
+    availableSlots: ["2:00 PM", "5:00 PM", "7:00 PM"],
+    host: {
+      name: "Comedy Academy Lagos",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+
+  // Additional Sports & Wellness
+  {
+    id: 28,
+    images: [
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+    ],
+    title: "Pilates Class at Tarkwa Bay",
+    location: "Tarkwa Bay, Lagos",
+    category: "Sports & Wellness",
+    duration: "1.5 hours",
+    price: 12000,
+    rating: 4.7,
+    reviewCount: 123,
+    badge: "Eco-Friendly",
+    description: "Energizing Pilates session on a secluded island beach",
+    highlights: ["Island setting", "Expert instruction", "All levels welcome", "Equipment provided"],
+    availableSlots: ["7:00 AM", "8:00 AM", "5:00 PM", "6:00 PM"],
+    host: {
+      name: "Island Fitness Lagos",
+      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 29,
+    images: [
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop"
+    ],
+    title: "Meditation Retreat at Obudu Ranch",
+    location: "Obudu, Cross River",
+    category: "Sports & Wellness",
+    duration: "6 hours",
+    price: 35000,
+    rating: 4.9,
+    reviewCount: 89,
+    badge: "Premium",
+    description: "Peaceful meditation retreat in mountain resort setting",
+    highlights: ["Mountain views", "Guided meditation", "Nature walks", "Healthy meals included"],
+    availableSlots: ["8:00 AM", "1:00 PM"],
+    host: {
+      name: "Mountain Wellness Retreat",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
+  },
+  {
+    id: 30,
+    images: [
+      "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=400&h=300&fit=crop"
+    ],
+    title: "Boxing Training at National Stadium",
+    location: "Surulere, Lagos",
+    category: "Sports & Wellness",
+    duration: "2 hours",
+    price: 15000,
+    rating: 4.8,
+    reviewCount: 167,
+    badge: "Popular",
+    description: "Professional boxing training session for all skill levels",
+    highlights: ["Professional trainers", "All skill levels", "Equipment provided", "Historic venue"],
+    availableSlots: ["6:00 AM", "4:00 PM", "6:00 PM"],
+    host: {
+      name: "Lagos Boxing Academy",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
   }
 ];
 

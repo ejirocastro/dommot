@@ -69,7 +69,7 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
 }) => {
     // DOM reference for scroll container manipulation
     const scrollContainerRef = useRef<HTMLDivElement>(null);
-    
+
     // Scroll state management for navigation arrow visibility
     const [canScrollLeft, setCanScrollLeft] = useState(false);
     const [canScrollRight, setCanScrollRight] = useState(false);
@@ -81,7 +81,7 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
      */
     const checkScrollPosition = () => {
         if (!scrollContainerRef.current) return;
-        
+
         const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
         setCanScrollLeft(scrollLeft > 0); // Can scroll left if not at start
         setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1); // Can scroll right if not at end (with 1px buffer)
@@ -93,11 +93,11 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
      */
     const scrollTo = (direction: 'left' | 'right') => {
         if (!scrollContainerRef.current || isScrolling) return;
-        
+
         setIsScrolling(true); // Prevent multiple simultaneous scroll operations
         const container = scrollContainerRef.current;
         const scrollAmount = container.clientWidth * 0.8; // Scroll 80% of visible width for optimal UX
-        const targetScroll = direction === 'left' 
+        const targetScroll = direction === 'left'
             ? container.scrollLeft - scrollAmount
             : container.scrollLeft + scrollAmount;
 
@@ -138,7 +138,7 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
      */
     const handleTouchEnd = () => {
         if (!touchStart || !touchEnd) return;
-        
+
         const distance = touchStart - touchEnd;
         const isLeftSwipe = distance > 50;  // Swipe left to scroll right (show next items)
         const isRightSwipe = distance < -50; // Swipe right to scroll left (show previous items)
@@ -173,7 +173,7 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
         setCurrentImageIndex(prev => {
             const listing = listings.find(l => l.id === listingId);
             if (!listing) return prev; // Safety check - listing not found
-            
+
             const current = prev[listingId] || 0; // Default to first image if not set
             const next = current >= listing.images.length - 1 ? 0 : current + 1; // Wrap to first image at end
             return { ...prev, [listingId]: next };
@@ -188,7 +188,7 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
         setCurrentImageIndex(prev => {
             const listing = listings.find(l => l.id === listingId);
             if (!listing) return prev; // Safety check - listing not found
-            
+
             const current = prev[listingId] || 0; // Default to first image if not set
             const prev_index = current <= 0 ? listing.images.length - 1 : current - 1; // Wrap to last image at start
             return { ...prev, [listingId]: prev_index };
@@ -221,12 +221,12 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
             <div className="flex items-center mb-4 lg:mb-6 px-4 sm:px-6 lg:px-8">
                 {/* Category icon (emoji) */}
                 <span className="text-2xl mr-3">{categoryIcon}</span>
-                
+
                 {/* Category title with responsive text sizing */}
                 <h2 className="text-xl lg:text-2xl font-semibold text-gray-900">
                     {categoryName}
                 </h2>
-                
+
                 {/* Show all button - positioned at the right end */}
                 <div className="ml-auto">
                     <button className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
@@ -243,7 +243,7 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
                     className={`absolute left-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${
                         // Show only when can scroll left and on group hover
                         canScrollLeft ? 'opacity-0 group-hover:opacity-100' : 'opacity-0 pointer-events-none'
-                    }`}
+                        }`}
                     aria-label="Scroll left"
                 >
                     <ChevronLeft className="w-5 h-5 text-gray-700" />
@@ -255,14 +255,14 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
                     className={`absolute right-2 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white/90 hover:bg-white rounded-full shadow-lg backdrop-blur-sm transition-all duration-300 flex items-center justify-center ${
                         // Show only when can scroll right and on group hover
                         canScrollRight ? 'opacity-0 group-hover:opacity-100' : 'opacity-0 pointer-events-none'
-                    }`}
+                        }`}
                     aria-label="Scroll right"
                 >
                     <ChevronRight className="w-5 h-5 text-gray-700" />
                 </button>
 
                 {/* Main Scrolling Container with Touch Support */}
-                <div 
+                <div
                     ref={scrollContainerRef}
                     className="overflow-x-auto scrollbar-hide scroll-smooth"
                     onTouchStart={handleTouchStart}
@@ -270,12 +270,12 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
                     onTouchEnd={handleTouchEnd}
                 >
                     {/* Inner flex container for horizontal layout */}
-                    <div className="flex gap-6 lg:gap-8 px-4 sm:px-6 lg:px-8 pb-2">
+                    <div className="flex gap-4 lg:gap-5 px-4 sm:px-6 lg:px-8 pb-2">
                         {/* Individual listing cards with responsive sizing */}
                         {listings.map((listing, index) => (
-                            <div 
-                                key={listing.id} 
-                                className="flex-shrink-0 w-64 sm:w-72 lg:w-80" // Prevent shrinking with responsive widths
+                            <div
+                                key={listing.id}
+                                className="flex-shrink-0 w-56 sm:w-60 lg:w-64" // Reduced card widths for Airbnb-like compactness
                             >
                                 {/* ListingCard component with all necessary props */}
                                 <ListingCard

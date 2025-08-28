@@ -17,6 +17,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import { Sparkles } from 'lucide-react';
 
 /**
@@ -30,8 +31,11 @@ import { Sparkles } from 'lucide-react';
  */
 export const Logo: React.FC = () => {
     return (
-        // Main logo container with flexible layout and no shrinking
-        <div className="flex items-center flex-shrink-0">
+        // Clickable logo container that routes to home page
+        <Link 
+            href="/" 
+            className="flex items-center flex-shrink-0 hover:opacity-90 transition-opacity duration-200 cursor-pointer"
+        >
             {/* Icon container with animated background effects */}
             <div className="relative">
                 {/* Animated glow effect background - creates depth and visual interest */}
@@ -53,6 +57,6 @@ export const Logo: React.FC = () => {
             <span className="ml-3 text-lg lg:text-xl font-bold bg-gradient-to-r from-sky-600 via-sky-700 to-sky-800 bg-clip-text text-transparent">
                 DOMMOT
             </span>
-        </div>
+        </Link>
     );
 };

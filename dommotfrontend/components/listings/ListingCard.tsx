@@ -75,8 +75,8 @@ export const ListingCard: React.FC<ListingCardProps> = ({
             className="group cursor-pointer transform hover:scale-[1.02] transition-all duration-500"
             style={{ animationDelay: `${index * 100}ms` }} // Staggered entrance animation
         >
-            {/* Image section container with overlay elements */}
-            <div className="relative overflow-hidden rounded-2xl mb-3 shadow-lg hover:shadow-2xl hover:shadow-sky-500/25 transition-all duration-500">
+            {/* Image section container with overlay elements - reduced margins for compactness */}
+            <div className="relative overflow-hidden rounded-xl mb-2 shadow-md hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-400">
                 {/* Main image carousel component */}
                 <ListingImage
                     listing={listing}
@@ -84,14 +84,14 @@ export const ListingCard: React.FC<ListingCardProps> = ({
                     onImageNext={onImageNext}
                     onImagePrev={onImagePrev}
                 />
-                
+
                 {/* Favorite button overlay - positioned absolutely in top right */}
                 <FavoriteButton isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
-                
+
                 {/* Image position indicators - positioned absolutely at bottom center */}
                 <ImageIndicators images={listing.images} currentIndex={currentImageIndex} />
             </div>
-            
+
             {/* Property information section below image */}
             <ListingInfo listing={listing} />
         </div>

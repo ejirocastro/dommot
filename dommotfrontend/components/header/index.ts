@@ -1,4 +1,5 @@
 export { Header } from './Header';
+export { SimpleHeader } from './SimpleHeader';
 export { Logo } from './Logo';
 export { TopNavigation } from './TopNavigation';
 export { MobileNavTabs } from './MobileNavTabs';
