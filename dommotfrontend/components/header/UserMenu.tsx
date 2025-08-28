@@ -99,7 +99,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
         
         // Account Section
         { icon: UserCircle, label: 'Profile', href: '#', divider: true },
-        { icon: Settings, label: 'Settings', href: '#' },
+        { icon: Settings, label: 'Account settings', href: '/account/settings' },
         
         // Hosting Section
         { icon: Home, label: 'Become a host', href: '#', divider: true },
