@@ -102,7 +102,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
         { icon: Settings, label: 'Account settings', href: '/account/settings' },
         
         // Hosting Section
-        { icon: Home, label: 'Become a host', href: '#', divider: true },
+        { icon: Home, label: 'Become a host', href: '/host', divider: true },
         { icon: UserPlus, label: 'Refer a host', href: '#' },
         
         // Support Section
