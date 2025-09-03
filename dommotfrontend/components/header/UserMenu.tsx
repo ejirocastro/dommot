@@ -98,12 +98,12 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
         { icon: Bell, label: 'Notifications', href: '#' },
         
         // Account Section
-        { icon: UserCircle, label: 'Profile', href: '#', divider: true },
+        { icon: UserCircle, label: 'Profile', href: '/profile', divider: true },
         { icon: Settings, label: 'Account settings', href: '/account/settings' },
         
         // Hosting Section
         { icon: Home, label: 'Become a host', href: '/host', divider: true },
-        { icon: UserPlus, label: 'Refer a host', href: '#' },
+        { icon: UserPlus, label: 'Refer a host', href: '/refer' },
         
         // Support Section
         { icon: HelpCircle, label: 'Help centre', href: '#', divider: true },

@@ -208,8 +208,8 @@ export const CreateListing: React.FC = () => {
                                         key={property.type}
                                         onClick={() => updateListingData('propertyType', property.type)}
                                         className={`group relative overflow-hidden rounded-2xl transition-all duration-300 transform hover:scale-105 ${listingData.propertyType === property.type
-                                                ? 'ring-4 ring-sky-400 shadow-xl'
-                                                : 'hover:shadow-xl'
+                                            ? 'ring-4 ring-sky-400 shadow-xl'
+                                            : 'hover:shadow-xl'
                                             }`}
                                     >
                                         <div className="aspect-[4/3] relative">
@@ -238,8 +238,8 @@ export const CreateListing: React.FC = () => {
 
                                         {/* Hover effect */}
                                         <div className={`absolute inset-0 transition-opacity duration-300 ${listingData.propertyType === property.type
-                                                ? 'bg-sky-500/20 opacity-100'
-                                                : 'bg-sky-500/10 opacity-0 group-hover:opacity-100'
+                                            ? 'bg-sky-500/20 opacity-100'
+                                            : 'bg-sky-500/10 opacity-0 group-hover:opacity-100'
                                             }`}></div>
                                     </button>
                                 ))}
@@ -301,8 +301,8 @@ export const CreateListing: React.FC = () => {
                                             key={amenity.name}
                                             onClick={() => toggleAmenity(amenity.name)}
                                             className={`flex flex-col items-center p-3 border-2 rounded-lg transition-all duration-200 ${listingData.amenities.includes(amenity.name)
-                                                    ? 'border-sky-500 bg-sky-50 text-sky-700'
-                                                    : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
+                                                ? 'border-sky-500 bg-sky-50 text-sky-700'
+                                                : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
                                                 }`}
                                         >
                                             <amenity.icon className="w-5 h-5 mb-2" />
@@ -324,8 +324,8 @@ export const CreateListing: React.FC = () => {
                                             key={amenity.name}
                                             onClick={() => toggleAmenity(amenity.name)}
                                             className={`flex flex-col items-center p-3 border-2 rounded-lg transition-all duration-200 ${listingData.amenities.includes(amenity.name)
-                                                    ? 'border-sky-500 bg-sky-50 text-sky-700'
-                                                    : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
+                                                ? 'border-sky-500 bg-sky-50 text-sky-700'
+                                                : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
                                                 }`}
                                         >
                                             <amenity.icon className="w-5 h-5 mb-2" />
@@ -347,8 +347,8 @@ export const CreateListing: React.FC = () => {
                                             key={amenity.name}
                                             onClick={() => toggleAmenity(amenity.name)}
                                             className={`flex flex-col items-center p-3 border-2 rounded-lg transition-all duration-200 ${listingData.amenities.includes(amenity.name)
-                                                    ? 'border-sky-500 bg-sky-50 text-sky-700'
-                                                    : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
+                                                ? 'border-sky-500 bg-sky-50 text-sky-700'
+                                                : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
                                                 }`}
                                         >
                                             <amenity.icon className="w-5 h-5 mb-2" />
@@ -370,8 +370,8 @@ export const CreateListing: React.FC = () => {
                                             key={amenity.name}
                                             onClick={() => toggleAmenity(amenity.name)}
                                             className={`flex flex-col items-center p-3 border-2 rounded-lg transition-all duration-200 ${listingData.amenities.includes(amenity.name)
-                                                    ? 'border-sky-500 bg-sky-50 text-sky-700'
-                                                    : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
+                                                ? 'border-sky-500 bg-sky-50 text-sky-700'
+                                                : 'border-gray-200 hover:border-gray-300 text-gray-700 bg-white'
                                                 }`}
                                         >
                                             <amenity.icon className="w-5 h-5 mb-2" />
@@ -410,7 +410,7 @@ export const CreateListing: React.FC = () => {
                             <p className="text-sm text-gray-600 mb-4">Provide details about the size and capacity</p>
                             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                                         <Bed className="w-4 h-4 mr-1 text-gray-500" />
                                         Bedrooms
                                     </label>
@@ -425,7 +425,7 @@ export const CreateListing: React.FC = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                                         <Bath className="w-4 h-4 mr-1 text-gray-500" />
                                         Bathrooms
                                     </label>
@@ -440,7 +440,7 @@ export const CreateListing: React.FC = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                                         <Bed className="w-4 h-4 mr-1 text-gray-500" />
                                         Beds
                                     </label>
@@ -455,7 +455,7 @@ export const CreateListing: React.FC = () => {
                                     </select>
                                 </div>
                                 <div>
-                                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                                         <Users className="w-4 h-4 mr-1 text-gray-500" />
                                         Guest Capacity
                                     </label>
@@ -470,7 +470,7 @@ export const CreateListing: React.FC = () => {
                                     </select>
                                 </div>
                                 <div className="md:col-span-2">
-                                    <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center">
+                                    <label className="flex items-center text-sm font-medium text-gray-700 mb-2">
                                         <Ruler className="w-4 h-4 mr-1 text-gray-500" />
                                         Square Footage (optional)
                                     </label>
@@ -657,8 +657,8 @@ export const CreateListing: React.FC = () => {
                         onClick={prevStep}
                         disabled={currentStepIndex === 0}
                         className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-colors ${currentStepIndex === 0
-                                ? 'text-gray-400 cursor-not-allowed'
-                                : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
+                            ? 'text-gray-400 cursor-not-allowed'
+                            : 'text-gray-700 hover:text-gray-900 hover:bg-gray-100'
                             }`}
                     >
                         <ArrowLeft className="w-4 h-4" />
@@ -677,8 +677,8 @@ export const CreateListing: React.FC = () => {
                             onClick={nextStep}
                             disabled={!canProceed()}
                             className={`flex items-center space-x-2 px-6 py-3 rounded-lg font-medium transition-colors ${canProceed()
-                                    ? 'bg-sky-600 text-white hover:bg-sky-700'
-                                    : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                ? 'bg-sky-600 text-white hover:bg-sky-700'
+                                : 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                 }`}
                         >
                             <span>Next</span>
