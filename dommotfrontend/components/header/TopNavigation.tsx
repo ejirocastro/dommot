@@ -118,8 +118,8 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
                         }`}
                         onClick={() => setActiveTab(tab)}
                     >
-                        {/* Special label handling for online services */}
-                        {tab === 'online' ? 'Services' : tab}
+                        {/* Special label handling for online services and experiences */}
+                        {tab === 'online' ? 'Services' : tab === 'experiences' ? 'Lifestyle' : tab}
                         
                         {/* Active tab glow effect */}
                         {isActiveTab(tab) && (

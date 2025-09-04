@@ -15,7 +15,7 @@ export const MobileMenu: React.FC<MobileMenuProps> = ({ mobileMenuOpen, setMobil
     const menuSections = [
         {
             title: "Book",
-            items: ["Stays", "Experiences", "Services"]
+            items: ["Stays", "Lifestyle", "Services"]
         },
         {
             title: "Host",
