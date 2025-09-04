@@ -20,7 +20,7 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
-import { Menu, User, Heart, Plane, MessageSquare, Bell, UserCircle, Settings, Home, UserPlus, HelpCircle, LogOut } from 'lucide-react';
+import { Menu, User, Heart, Plane, MessageSquare, UserCircle, Settings, Home, UserPlus, HelpCircle, LogOut } from 'lucide-react';
 
 /**
  * UserMenuProps - Props interface for the UserMenu component
@@ -95,7 +95,6 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
         
         // Communication Section
         { icon: MessageSquare, label: 'Messages', href: '/messages', divider: true },
-        { icon: Bell, label: 'Notifications', href: '#' },
         
         // Account Section
         { icon: UserCircle, label: 'Profile', href: '/profile', divider: true },
