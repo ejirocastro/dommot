@@ -47,6 +47,15 @@ interface UserMenuProps {
 export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
+    
+    // Check if user is logged in
+    const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+    
+    React.useEffect(() => {
+        // Check localStorage for user data on client side
+        const user = localStorage.getItem('user');
+        setIsLoggedIn(!!user);
+    }, []);
 
     /**
      * Handle click outside functionality to close dropdown
@@ -80,36 +89,62 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
     };
 
     /**
+     * Handle logout
+     */
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        setIsLoggedIn(false);
+        setIsOpen(false);
+        window.location.href = '/';
+    };
+
+    /**
      * Menu items configuration with icons and labels
      */
-    const menuItems: Array<{
+    const getMenuItems = (): Array<{
         icon: React.ComponentType<{className?: string}>;
         label: string;
         href: string;
         divider?: boolean;
         danger?: boolean;
-    }> = [
-        // Travel & Booking Section
-        { icon: Heart, label: 'Wishlists', href: '#' },
-        { icon: Plane, label: 'Trips', href: '#' },
+        onClick?: () => void;
+    }> => {
+        if (!isLoggedIn) {
+            // Menu for non-authenticated users
+            return [
+                { icon: User, label: 'Sign up', href: '/signup' },
+                { icon: LogOut, label: 'Login', href: '/login', divider: true },
+                { icon: Home, label: 'Become a host', href: '/host', divider: true },
+                { icon: HelpCircle, label: 'Help centre', href: '#' },
+            ];
+        }
         
-        // Communication Section
-        { icon: MessageSquare, label: 'Messages', href: '/messages', divider: true },
-        
-        // Account Section
-        { icon: UserCircle, label: 'Profile', href: '/profile', divider: true },
-        { icon: Settings, label: 'Account settings', href: '/account/settings' },
-        
-        // Hosting Section
-        { icon: Home, label: 'Become a host', href: '/host', divider: true },
-        { icon: UserPlus, label: 'Refer a host', href: '/refer' },
-        
-        // Support Section
-        { icon: HelpCircle, label: 'Help centre', href: '#', divider: true },
-        
-        // Logout Section
-        { icon: LogOut, label: 'Logout', href: '#', divider: true, danger: true },
-    ];
+        // Menu for authenticated users
+        return [
+            // Travel & Booking Section
+            { icon: Heart, label: 'Wishlists', href: '#' },
+            { icon: Plane, label: 'Trips', href: '#' },
+            
+            // Communication Section
+            { icon: MessageSquare, label: 'Messages', href: '/messages', divider: true },
+            
+            // Account Section
+            { icon: UserCircle, label: 'Profile', href: '/profile', divider: true },
+            { icon: Settings, label: 'Account settings', href: '/account/settings' },
+            
+            // Hosting Section
+            { icon: Home, label: 'Become a host', href: '/host', divider: true },
+            { icon: UserPlus, label: 'Refer a host', href: '/refer' },
+            
+            // Support Section
+            { icon: HelpCircle, label: 'Help centre', href: '#', divider: true },
+            
+            // Logout Section
+            { icon: LogOut, label: 'Logout', href: '#', divider: true, danger: true, onClick: handleLogout },
+        ];
+    };
+
+    const menuItems = getMenuItems();
 
     return (
         <div className="relative">
@@ -141,22 +176,43 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
                                 {item.divider && (
                                     <div className="border-t border-sky-100/60 my-2 mx-3"></div>
                                 )}
-                                <a
-                                    href={item.href}
-                                    className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer ${
-                                        item.danger 
-                                            ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
-                                            : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
-                                    }`}
-                                    onClick={() => setIsOpen(false)}
-                                >
-                                    <IconComponent className={`w-4 h-4 transition-all duration-300 ${
-                                        item.danger 
-                                            ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
-                                            : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
-                                    }`} />
-                                    <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
-                                </a>
+                                {item.onClick ? (
+                                    <button
+                                        className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer w-full text-left ${
+                                            item.danger 
+                                                ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
+                                                : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
+                                        }`}
+                                        onClick={() => {
+                                            item.onClick?.();
+                                            setIsOpen(false);
+                                        }}
+                                    >
+                                        <IconComponent className={`w-4 h-4 transition-all duration-300 ${
+                                            item.danger 
+                                                ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
+                                                : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
+                                        }`} />
+                                        <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
+                                    </button>
+                                ) : (
+                                    <a
+                                        href={item.href}
+                                        className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer ${
+                                            item.danger 
+                                                ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
+                                                : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
+                                        }`}
+                                        onClick={() => setIsOpen(false)}
+                                    >
+                                        <IconComponent className={`w-4 h-4 transition-all duration-300 ${
+                                            item.danger 
+                                                ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
+                                                : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
+                                        }`} />
+                                        <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
+                                    </a>
+                                )}
                             </React.Fragment>
                         );
                     })}

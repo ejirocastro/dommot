@@ -74,6 +74,7 @@ export const ListingCard: React.FC<ListingCardProps> = ({
         <div
             className="group cursor-pointer transform hover:scale-[1.02] transition-all duration-500"
             style={{ animationDelay: `${index * 100}ms` }} // Staggered entrance animation
+            onClick={() => window.location.href = `/listings/${listing.id}`}
         >
             {/* Image section container with overlay elements - reduced margins for compactness */}
             <div className="relative overflow-hidden rounded-xl mb-2 shadow-md hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-400">
