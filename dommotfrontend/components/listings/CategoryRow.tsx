@@ -23,6 +23,7 @@
 
 import React, { useRef, useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 import { ListingCard } from './ListingCard';
 import { Listing } from '../../types';
 
@@ -229,9 +230,18 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
 
                 {/* Show all button - positioned at the right end */}
                 <div className="ml-auto">
-                    <button className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                        Show all
-                    </button>
+                    {categoryName === "Stays in Lekki" ? (
+                        <Link 
+                            href="/stays/lekki" 
+                            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                        >
+                            Show all
+                        </Link>
+                    ) : (
+                        <button className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                            Show all
+                        </button>
+                    )}
                 </div>
             </div>
 
