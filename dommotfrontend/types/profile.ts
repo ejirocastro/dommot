@@ -128,7 +128,7 @@ export type ExperienceCategory =
   | 'Cruises'
   | 'Museums'
   | 'Adventure & Nature'
-  | 'Cultural Tours'
+  | 'Boat and Yacht rentals'
   | 'Food & Drink'
   | 'Entertainment'
   | 'Sports & Wellness'

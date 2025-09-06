@@ -36,7 +36,7 @@ const ExperienceGrid: React.FC<ExperienceGridProps> = ({
             'restaurants': 'Restaurants',
             'clubs-nightlife': 'Clubs & Nightlife',
             'adventure-nature': 'Adventure & Nature',
-            'cultural-tours': 'Cultural Tours',
+            'boat-yacht-rentals': 'Boat and Yacht rentals',
             'food-drink': 'Food & Drink',
             'entertainment': 'Entertainment',
             'sports-wellness': 'Sports & Wellness'
@@ -53,7 +53,7 @@ const ExperienceGrid: React.FC<ExperienceGridProps> = ({
                         'restaurants': 'Restaurants',
                         'clubs-nightlife': 'Clubs & Nightlife',
                         'adventure-nature': 'Adventure & Nature',
-                        'cultural-tours': 'Cultural Tours',
+                        'boat-yacht-rentals': 'Boat and Yacht rentals',
                         'food-drink': 'Food & Drink',
                         'entertainment': 'Entertainment',
                         'sports-wellness': 'Sports & Wellness'

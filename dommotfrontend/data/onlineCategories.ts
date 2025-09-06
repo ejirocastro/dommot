@@ -13,6 +13,8 @@ export const onlineCategories: OnlineCategory[] = [
   { id: 10, name: 'Hot Stone', icon: '🪨', isActive: false },
   { id: 11, name: 'Aromatherapy', icon: '🕯️', isActive: false },
   { id: 12, name: 'Couples', icon: '💑', isActive: false },
-  { id: 13, name: 'Yacht Rentals', icon: '🛥️', isActive: false },
-  { id: 14, name: 'Boat Rentals', icon: '⛵', isActive: false }
+  { id: 14, name: 'Make up artist', icon: '💄', isActive: false },
+  { id: 15, name: 'Chauffeur Service', icon: '🚗', isActive: false },
+  { id: 16, name: 'Hair Stylist', icon: '💇‍♀️', isActive: false },
+  { id: 17, name: 'Laundry Services', icon: '🧺', isActive: false }
 ];

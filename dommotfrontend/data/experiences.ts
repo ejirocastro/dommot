@@ -151,28 +151,28 @@ export const experiences: Experience[] = [
     }
   },
 
-  // Cultural Tours
+  // Boat and Yacht rentals
   {
     id: 7,
     images: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop"
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=400&h=300&fit=crop"
     ],
-    title: "Lagos Heritage Walking Tour",
-    location: "Lagos Island, Lagos",
-    category: "Cultural Tours",
-    duration: "3 hours",
-    price: 15000,
-    rating: 4.8,
-    reviewCount: 189,
-    badge: "Local Favorite",
-    description: "Discover Lagos' rich history through guided tours of historic landmarks",
-    highlights: ["National Museum", "Freedom Park", "Tafawa Balewa Square", "Local stories"],
+    title: "Luxury Yacht Charter Experience",
+    location: "Victoria Island, Lagos",
+    category: "Boat and Yacht rentals",
+    duration: "4-6 hours",
+    price: 250000,
+    rating: 4.9,
+    reviewCount: 89,
+    badge: "Premium",
+    description: "Enjoy luxury yacht charter with professional crew and premium amenities",
+    highlights: ["Professional crew", "Premium amenities", "Ocean views", "Catering available"],
     availableSlots: ["10:00 AM", "2:00 PM", "4:00 PM"],
     host: {
-      name: "Dr. Folake Adeyemi",
-      avatar: "https://images.unsplash.com/photo-1494790108755-2616b612b77c?w=100&h=100&fit=crop&crop=face",
+      name: "Lagos Marine Charter",
+      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       isVerified: true
     }
   },
@@ -180,23 +180,23 @@ export const experiences: Experience[] = [
     id: 8,
     images: [
       "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop"
     ],
-    title: "Abuja Cultural Center Experience",
-    location: "Garki, Abuja",
-    category: "Cultural Tours",
-    duration: "2.5 hours",
-    price: 12000,
-    rating: 4.6,
-    reviewCount: 98,
-    badge: "New",
-    description: "Immerse yourself in Nigerian arts, crafts, and cultural performances",
-    highlights: ["Traditional crafts", "Cultural performances", "Art galleries", "Local artisans"],
-    availableSlots: ["11:00 AM", "2:00 PM", "4:00 PM"],
+    title: "Speed Boat Adventure Tour",
+    location: "Lekki, Lagos",
+    category: "Boat and Yacht rentals",
+    duration: "2-3 hours",
+    price: 85000,
+    rating: 4.7,
+    reviewCount: 124,
+    badge: "Popular",
+    description: "Thrilling speed boat tour exploring Lagos coastline and waterways",
+    highlights: ["High-speed adventure", "Coastal exploration", "Professional captain", "Safety equipment included"],
+    availableSlots: ["9:00 AM", "12:00 PM", "3:00 PM"],
     host: {
-      name: "Cultural Team",
-      avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
+      name: "Aqua Adventure Lagos",
+      avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
       isVerified: true
     }
   },
@@ -525,27 +525,27 @@ export const experiences: Experience[] = [
     }
   },
 
-  // Additional Cultural Tours
+  // Additional Boat and Yacht rentals
   {
     id: 22,
     images: [
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop"
+      "https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&h=300&fit=crop"
     ],
-    title: "Royal Palace of Benin Tour",
-    location: "Benin City, Edo",
-    category: "Cultural Tours",
-    duration: "4 hours",
-    price: 18000,
-    rating: 4.9,
-    reviewCount: 87,
+    title: "Catamaran Sunset Cruise",
+    location: "Lagos Lagoon, Lagos",
+    category: "Boat and Yacht rentals",
+    duration: "3-4 hours",
+    price: 120000,
+    rating: 4.8,
+    reviewCount: 156,
     badge: "Popular",
-    description: "Explore the ancient kingdom's royal palace and artifacts",
-    highlights: ["Royal artifacts", "Ancient history", "Traditional architecture", "Cultural performances"],
-    availableSlots: ["10:00 AM", "2:00 PM"],
+    description: "Relaxing catamaran cruise with stunning sunset views over Lagos lagoon",
+    highlights: ["Sunset views", "Spacious deck", "Refreshments included", "Perfect for groups"],
+    availableSlots: ["4:00 PM", "5:00 PM", "6:00 PM"],
     host: {
-      name: "Benin Heritage Guide",
+      name: "Sunset Marine Services",
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       isVerified: true
     }
@@ -553,23 +553,23 @@ export const experiences: Experience[] = [
   {
     id: 23,
     images: [
-      "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
-      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop"
+      "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop"
     ],
-    title: "Kano City Ancient Walls Tour",
-    location: "Kano, Kano State",
-    category: "Cultural Tours",
-    duration: "3.5 hours",
-    price: 16000,
-    rating: 4.7,
-    reviewCount: 92,
-    badge: "Popular",
-    description: "Walk through centuries-old city walls and traditional markets",
-    highlights: ["Ancient walls", "Traditional markets", "Islamic architecture", "Local crafts"],
-    availableSlots: ["9:00 AM", "2:00 PM", "4:00 PM"],
+    title: "Deep Sea Fishing Charter",
+    location: "Lagos Atlantic Coast",
+    category: "Boat and Yacht rentals",
+    duration: "6-8 hours",
+    price: 180000,
+    rating: 4.9,
+    reviewCount: 78,
+    badge: "Premium",
+    description: "Professional deep sea fishing experience with experienced crew and equipment",
+    highlights: ["Professional equipment", "Experienced crew", "Fish cleaning service", "Ocean adventure"],
+    availableSlots: ["6:00 AM", "7:00 AM"],
     host: {
-      name: "Kano Tourism Board",
+      name: "Atlantic Fishing Charters",
       avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop&crop=face",
       isVerified: true
     }
@@ -747,6 +747,32 @@ export const experiences: Experience[] = [
       avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=face",
       isVerified: true
     }
+  },
+
+  // Additional Boat and Yacht rental
+  {
+    id: 31,
+    images: [
+      "https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop",
+      "https://images.unsplash.com/photo-1540946485063-a40da27545f8?w=400&h=300&fit=crop"
+    ],
+    title: "Private Yacht Birthday Party",
+    location: "Lagos Marina, Lagos",
+    category: "Boat and Yacht rentals",
+    duration: "5-6 hours",
+    price: 300000,
+    rating: 4.8,
+    reviewCount: 92,
+    badge: "Premium",
+    description: "Celebrate in style with private yacht rental perfect for special occasions",
+    highlights: ["Private charter", "Party setup included", "DJ system", "Catering options"],
+    availableSlots: ["11:00 AM", "2:00 PM", "5:00 PM"],
+    host: {
+      name: "Elite Yacht Rentals",
+      avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop&crop=face",
+      isVerified: true
+    }
   }
 ];
 
@@ -761,7 +787,7 @@ export const experienceCategories: FilterOption[] = [
   { id: 'restaurants', name: 'Restaurants', icon: '🍽️' },
   { id: 'clubs-nightlife', name: 'Clubs & Nightlife', icon: '🌃' },
   { id: 'adventure-nature', name: 'Adventure & Nature', icon: '🌿' },
-  { id: 'cultural-tours', name: 'Cultural Tours', icon: '🏛️' },
+  { id: 'boat-yacht-rentals', name: 'Boat and Yacht rentals', icon: '🛥️' },
   { id: 'food-drink', name: 'Food & Drink', icon: '🍻' },
   { id: 'entertainment', name: 'Entertainment', icon: '🎭' },
   { id: 'sports-wellness', name: 'Sports & Wellness', icon: '🧘' }

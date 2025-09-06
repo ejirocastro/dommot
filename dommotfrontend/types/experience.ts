@@ -23,7 +23,7 @@ export type ExperienceCategory =
   | 'Restaurants'
   | 'Clubs & Nightlife' 
   | 'Adventure & Nature'
-  | 'Cultural Tours'
+  | 'Boat and Yacht rentals'
   | 'Food & Drink'
   | 'Entertainment'
   | 'Sports & Wellness';
