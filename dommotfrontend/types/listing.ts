@@ -9,6 +9,8 @@ export interface Listing {
   isGuestFavorite: boolean;
   badge: BadgeType;
   category: string;
+  location: string;
+  guests: number;
 }
 
 export type BadgeType = 

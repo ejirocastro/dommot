@@ -19,6 +19,18 @@ export default function BookingPage() {
     specialRequests: ''
   });
 
+  if (!params?.id) {
+    return (
+      <div className="min-h-screen bg-gray-50">
+        <SimpleHeader />
+        <div className="max-w-4xl mx-auto px-4 py-12 text-center">
+          <h1 className="text-2xl font-bold mb-4">Invalid booking request</h1>
+          <p className="text-gray-600">No listing ID provided.</p>
+        </div>
+      </div>
+    );
+  }
+
   const listingId = parseInt(params.id as string);
   const listing = listings.find(l => l.id === listingId);
 
@@ -68,7 +80,14 @@ export default function BookingPage() {
     e.preventDefault();
     router.push('/checkout?' + new URLSearchParams({
       listingId: listingId.toString(),
-      ...bookingData,
+      checkIn: bookingData.checkIn,
+      checkOut: bookingData.checkOut,
+      guests: bookingData.guests.toString(),
+      firstName: bookingData.firstName,
+      lastName: bookingData.lastName,
+      email: bookingData.email,
+      phone: bookingData.phone,
+      specialRequests: bookingData.specialRequests,
       nights: nights.toString(),
       total: total.toString()
     }));

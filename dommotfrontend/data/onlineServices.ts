@@ -1,5 +1,7 @@
 import { OnlineService } from '@/types';
 
+export type { OnlineService } from '@/types';
+
 export const onlineServices: OnlineService[] = [
   {
     id: 1,

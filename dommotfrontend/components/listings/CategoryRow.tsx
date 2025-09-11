@@ -230,18 +230,12 @@ export const CategoryRow: React.FC<CategoryRowProps> = ({
 
                 {/* Show all button - positioned at the right end */}
                 <div className="ml-auto">
-                    {categoryName === "Stays in Lekki" ? (
-                        <Link 
-                            href="/stays/lekki" 
-                            className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
-                        >
-                            Show all
-                        </Link>
-                    ) : (
-                        <button className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                            Show all
-                        </button>
-                    )}
+                    <Link 
+                        href={`/stays/${categoryName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')}`}
+                        className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                    >
+                        Show all
+                    </Link>
                 </div>
             </div>
 

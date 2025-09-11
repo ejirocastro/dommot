@@ -1,26 +1,26 @@
 'use client';
 
 import { useSearchParams, useRouter } from 'next/navigation';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { listings } from '../../data/listings';
 import { SimpleHeader } from '../../components';
 
-export default function CheckoutPage() {
+function CheckoutPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [isProcessing, setIsProcessing] = useState(false);
   const [paymentMethod, setPaymentMethod] = useState('card');
 
-  const listingId = searchParams.get('listingId');
-  const checkIn = searchParams.get('checkIn');
-  const checkOut = searchParams.get('checkOut');
-  const guests = searchParams.get('guests');
-  const nights = searchParams.get('nights');
-  const total = searchParams.get('total');
-  const firstName = searchParams.get('firstName');
-  const lastName = searchParams.get('lastName');
-  const email = searchParams.get('email');
-  const phone = searchParams.get('phone');
+  const listingId = searchParams?.get('listingId');
+  const checkIn = searchParams?.get('checkIn');
+  const checkOut = searchParams?.get('checkOut');
+  const guests = searchParams?.get('guests');
+  const nights = searchParams?.get('nights');
+  const total = searchParams?.get('total');
+  const firstName = searchParams?.get('firstName');
+  const lastName = searchParams?.get('lastName');
+  const email = searchParams?.get('email');
+  const phone = searchParams?.get('phone');
 
   const listing = listingId ? listings.find(l => l.id === parseInt(listingId)) : null;
 
@@ -293,5 +293,13 @@ export default function CheckoutPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function CheckoutPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50 flex items-center justify-center">Loading...</div>}>
+      <CheckoutPageContent />
+    </Suspense>
   );
 }

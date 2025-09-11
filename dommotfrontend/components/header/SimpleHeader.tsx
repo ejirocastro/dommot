@@ -17,15 +17,15 @@ import { UserMenu } from './UserMenu';
  */
 
 interface SimpleHeaderProps {
-    scrollY: number;
-    mobileMenuOpen: boolean;
-    setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    scrollY?: number;
+    mobileMenuOpen?: boolean;
+    setMobileMenuOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export const SimpleHeader: React.FC<SimpleHeaderProps> = ({
-    scrollY,
-    mobileMenuOpen,
-    setMobileMenuOpen
+    scrollY = 0,
+    mobileMenuOpen = false,
+    setMobileMenuOpen = () => {}
 }) => {
     // State for user dropdown menu
     const [userMenuOpen, setUserMenuOpen] = useState(false);

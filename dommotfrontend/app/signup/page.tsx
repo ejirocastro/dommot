@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { SimpleHeader } from '../../components';
+import { setAuthData } from '../../utils/auth';
 
 export default function SignUpPage() {
   const router = useRouter();
@@ -25,27 +26,36 @@ export default function SignUpPage() {
     try {
       if (formData.password !== formData.confirmPassword) {
         setError('Passwords do not match');
+        setIsLoading(false);
         return;
       }
 
       if (formData.password.length < 6) {
         setError('Password must be at least 6 characters long');
+        setIsLoading(false);
         return;
       }
 
       // Simulate API call
       await new Promise(resolve => setTimeout(resolve, 1000));
-      
+
       // For demo purposes, accept any valid data
       if (formData.firstName && formData.lastName && formData.email && formData.password) {
-        localStorage.setItem('user', JSON.stringify({ 
+        // Use the auth utility to set authentication data with proper expiration
+        setAuthData({
           email: formData.email,
           firstName: formData.firstName,
           lastName: formData.lastName
-        }));
-        router.push('/');
+        } as any, 24); // 24 hours expiration
+
+        // Dispatch custom event to update UI
+        window.dispatchEvent(new Event('authStateChange'));
+
+        // Redirect to dashboard after successful signup
+        router.push('/dashboard');
       } else {
         setError('Please fill in all fields');
+        setIsLoading(false);
       }
     } catch (err) {
       setError('Registration failed. Please try again.');
@@ -55,6 +65,9 @@ export default function SignUpPage() {
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Clear any previous errors when user starts typing
+    if (error) setError('');
+
     setFormData(prev => ({
       ...prev,
       [e.target.name]: e.target.value
@@ -64,14 +77,14 @@ export default function SignUpPage() {
   return (
     <div className="min-h-screen bg-gray-50">
       <SimpleHeader />
-      
+
       <div className="flex items-center justify-center py-12 px-4">
         <div className="max-w-md w-full space-y-8">
           <div className="text-center">
             <h2 className="text-3xl font-bold text-gray-900">Create your account</h2>
             <p className="mt-2 text-gray-600">Join Dommot and start your journey</p>
           </div>
-          
+
           <div className="bg-white py-8 px-6 shadow-sm rounded-lg">
             <form className="space-y-6" onSubmit={handleSubmit}>
               <div className="grid grid-cols-2 gap-4">
@@ -86,11 +99,11 @@ export default function SignUpPage() {
                     required
                     value={formData.firstName}
                     onChange={handleChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                     placeholder="First name"
                   />
                 </div>
-                
+
                 <div>
                   <label htmlFor="lastName" className="block text-sm font-medium text-gray-700">
                     Last name
@@ -102,7 +115,7 @@ export default function SignUpPage() {
                     required
                     value={formData.lastName}
                     onChange={handleChange}
-                    className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                    className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                     placeholder="Last name"
                   />
                 </div>
@@ -119,7 +132,7 @@ export default function SignUpPage() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   placeholder="Enter your email"
                 />
               </div>
@@ -135,7 +148,7 @@ export default function SignUpPage() {
                   required
                   value={formData.password}
                   onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   placeholder="Create a password"
                 />
               </div>
@@ -151,7 +164,7 @@ export default function SignUpPage() {
                   required
                   value={formData.confirmPassword}
                   onChange={handleChange}
-                  className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-pink-500 focus:border-pink-500"
+                  className="mt-1 block w-full border border-gray-300 rounded-lg px-3 py-2 shadow-sm focus:outline-none focus:ring-2 focus:ring-sky-500 focus:border-sky-500"
                   placeholder="Confirm your password"
                 />
               </div>
@@ -163,17 +176,17 @@ export default function SignUpPage() {
                     name="terms"
                     type="checkbox"
                     required
-                    className="h-4 w-4 text-pink-600 focus:ring-pink-500 border-gray-300 rounded"
+                    className="h-4 w-4 text-sky-600 focus:ring-sky-500 border-gray-300 rounded"
                   />
                 </div>
                 <div className="ml-3 text-sm">
                   <label htmlFor="terms" className="text-gray-700">
                     I agree to the{' '}
-                    <Link href="#" className="font-medium text-pink-600 hover:text-pink-500">
+                    <Link href="#" className="font-medium text-sky-600 hover:text-sky-500">
                       Terms of Service
                     </Link>{' '}
                     and{' '}
-                    <Link href="#" className="font-medium text-pink-600 hover:text-pink-500">
+                    <Link href="#" className="font-medium text-sky-600 hover:text-sky-500">
                       Privacy Policy
                     </Link>
                   </label>
@@ -189,14 +202,14 @@ export default function SignUpPage() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
+                className="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-gradient-to-r from-sky-500 to-sky-600 hover:from-sky-600 hover:to-sky-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200"
               >
                 {isLoading ? 'Creating account...' : 'Create account'}
               </button>
 
               <div className="text-center">
                 <span className="text-sm text-gray-600">Already have an account? </span>
-                <Link href="/login" className="text-sm font-medium text-pink-600 hover:text-pink-500">
+                <Link href="/login" className="text-sm font-medium text-sky-600 hover:text-sky-500">
                   Sign in
                 </Link>
               </div>

@@ -20,7 +20,10 @@
 'use client';
 
 import React, { useRef, useEffect } from 'react';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { Menu, User, Heart, Plane, MessageSquare, UserCircle, Settings, Home, UserPlus, HelpCircle, LogOut } from 'lucide-react';
+import { isAuthenticated, clearAuthData, checkAndAutoLogout } from '../../utils/auth';
 
 /**
  * UserMenuProps - Props interface for the UserMenu component
@@ -47,15 +50,61 @@ interface UserMenuProps {
 export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
-    
+    const router = useRouter();
+
     // Check if user is logged in
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
-    
+
     React.useEffect(() => {
-        // Check localStorage for user data on client side
-        const user = localStorage.getItem('user');
-        setIsLoggedIn(!!user);
-    }, []);
+        // Check authentication status with expiration validation
+        const checkAuthStatus = () => {
+            // This will automatically clear expired tokens
+            const authenticated = isAuthenticated();
+            console.log('Auth status check:', { authenticated });
+            setIsLoggedIn(authenticated);
+        };
+
+        // Check on mount
+        checkAuthStatus();
+
+        // Set up periodic token expiration check (every 30 seconds)
+        const interval = setInterval(() => {
+            const loggedOut = checkAndAutoLogout();
+            if (loggedOut && isLoggedIn) {
+                console.log('Auto-logout due to token expiration');
+                setIsLoggedIn(false);
+                setIsOpen(false);
+                router.push('/');
+            }
+        }, 30000);
+
+        // Listen for storage changes (when user logs in/out in another tab)
+        window.addEventListener('storage', checkAuthStatus);
+
+        // Listen for custom auth events
+        window.addEventListener('authStateChange', checkAuthStatus);
+
+        // Check auth status when the page becomes visible (user switches back to tab)
+        const handleVisibilityChange = () => {
+            if (!document.hidden) {
+                const loggedOut = checkAndAutoLogout();
+                if (loggedOut && isLoggedIn) {
+                    console.log('Auto-logout on page focus due to token expiration');
+                    setIsLoggedIn(false);
+                    setIsOpen(false);
+                    router.push('/');
+                }
+            }
+        };
+        document.addEventListener('visibilitychange', handleVisibilityChange);
+
+        return () => {
+            clearInterval(interval);
+            window.removeEventListener('storage', checkAuthStatus);
+            window.removeEventListener('authStateChange', checkAuthStatus);
+            document.removeEventListener('visibilitychange', handleVisibilityChange);
+        };
+    }, [isLoggedIn, router, setIsOpen]);
 
     /**
      * Handle click outside functionality to close dropdown
@@ -92,17 +141,24 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
      * Handle logout
      */
     const handleLogout = () => {
-        localStorage.removeItem('user');
+        // Use the auth utility to clear all data
+        clearAuthData();
+
+        // Update state
         setIsLoggedIn(false);
         setIsOpen(false);
-        window.location.href = '/';
+
+        // Small delay to ensure everything is cleared before navigation
+        setTimeout(() => {
+            router.push('/');
+        }, 100);
     };
 
     /**
      * Menu items configuration with icons and labels
      */
     const getMenuItems = (): Array<{
-        icon: React.ComponentType<{className?: string}>;
+        icon: React.ComponentType<{ className?: string }>;
         label: string;
         href: string;
         divider?: boolean;
@@ -118,27 +174,27 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
                 { icon: HelpCircle, label: 'Help centre', href: '#' },
             ];
         }
-        
+
         // Menu for authenticated users
         return [
             // Travel & Booking Section
             { icon: Heart, label: 'Wishlists', href: '#' },
             { icon: Plane, label: 'Trips', href: '#' },
-            
+
             // Communication Section
             { icon: MessageSquare, label: 'Messages', href: '/messages', divider: true },
-            
+
             // Account Section
             { icon: UserCircle, label: 'Profile', href: '/profile', divider: true },
             { icon: Settings, label: 'Account settings', href: '/account/settings' },
-            
+
             // Hosting Section
             { icon: Home, label: 'Become a host', href: '/host', divider: true },
             { icon: UserPlus, label: 'Refer a host', href: '/refer' },
-            
+
             // Support Section
             { icon: HelpCircle, label: 'Help centre', href: '#', divider: true },
-            
+
             // Logout Section
             { icon: LogOut, label: 'Logout', href: '#', divider: true, danger: true, onClick: handleLogout },
         ];
@@ -156,7 +212,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
             >
                 {/* Hamburger menu icon */}
                 <Menu className="w-4 h-4 text-sky-700" />
-                
+
                 {/* User avatar with gradient background */}
                 <div className="w-8 h-8 bg-gradient-to-r from-sky-500 to-sky-600 rounded-full flex items-center justify-center shadow-lg">
                     <User className="w-4 h-4 text-white" />
@@ -178,40 +234,36 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
                                 )}
                                 {item.onClick ? (
                                     <button
-                                        className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer w-full text-left ${
-                                            item.danger 
-                                                ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
-                                                : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
-                                        }`}
+                                        className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer w-full text-left ${item.danger
+                                            ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
+                                            : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
+                                            }`}
                                         onClick={() => {
                                             item.onClick?.();
                                             setIsOpen(false);
                                         }}
                                     >
-                                        <IconComponent className={`w-4 h-4 transition-all duration-300 ${
-                                            item.danger 
-                                                ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
-                                                : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
-                                        }`} />
+                                        <IconComponent className={`w-4 h-4 transition-all duration-300 ${item.danger
+                                            ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
+                                            : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
+                                            }`} />
                                         <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
                                     </button>
                                 ) : (
-                                    <a
+                                    <Link
                                         href={item.href}
-                                        className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer ${
-                                            item.danger 
-                                                ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
-                                                : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
-                                        }`}
+                                        className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer ${item.danger
+                                            ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
+                                            : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
+                                            }`}
                                         onClick={() => setIsOpen(false)}
                                     >
-                                        <IconComponent className={`w-4 h-4 transition-all duration-300 ${
-                                            item.danger 
-                                                ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
-                                                : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
-                                        }`} />
+                                        <IconComponent className={`w-4 h-4 transition-all duration-300 ${item.danger
+                                            ? 'text-red-500 group-hover:text-red-600 group-hover:scale-110'
+                                            : 'text-sky-600 group-hover:text-sky-700 group-hover:scale-110'
+                                            }`} />
                                         <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
-                                    </a>
+                                    </Link>
                                 )}
                             </React.Fragment>
                         );
