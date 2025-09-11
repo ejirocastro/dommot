@@ -19,6 +19,7 @@
  */
 
 import React from 'react';
+import Link from 'next/link';
 import { Category } from '../../types';
 
 /**
@@ -37,48 +38,78 @@ interface CategoryItemProps {
  * Renders an individual category filter with icon and label. Provides
  * visual feedback for active and hover states with smooth animations
  * and professional styling consistent with the overall design system.
+ * Now includes navigation functionality to take users to location-specific
+ * filtered views of properties.
  * 
  * @param {CategoryItemProps} props - Component props containing category data
- * @returns {JSX.Element} Rendered category item button
+ * @returns {JSX.Element} Rendered category item button with navigation
  */
 export const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
+
+    /**
+     * Generate URL path for category-specific filtered view
+     * @param {string} categoryName - The name of the category
+     * @returns {string} URL path for the category filter
+     */
+    const getCategoryUrl = (categoryName: string): string => {
+        const categoryMap: Record<string, string> = {
+            'Stays in Lekki': '/stays/lekki',
+            'Stays in Victoria Island': '/stays/victoria-island',
+            'Stays in Ikoyi': '/stays/ikoyi',
+            'Stays in Banana Island': '/stays/banana-island',
+            'Stays in Eko Atlantic': '/stays/eko-atlantic',
+            'Stays in Maryland': '/stays/maryland',
+            'Other Lagos Areas': '/stays/other-lagos',
+            'Outside Lagos': '/stays/outside-lagos'
+        };
+
+        // Return specific route or default to filtered homepage
+        return categoryMap[categoryName] || `/?location=${encodeURIComponent(categoryName)}`;
+    };
+
     return (
-        // Interactive category button with dynamic styling
-        <button
-            className={`flex flex-col items-center min-w-0 flex-shrink-0 group pb-3 px-2 rounded-lg transition-all duration-300 relative ${
-                // Active state styling with gradient background
-                category.active
-                    ? 'border-b-2 border-transparent bg-gradient-to-t from-sky-50 to-transparent'
-                    // Inactive state with hover effects
-                    : 'border-b-2 border-transparent hover:bg-gradient-to-t hover:from-sky-50 hover:to-transparent'
-            }`}
+        // Navigation link wrapping the category button
+        <Link
+            href={getCategoryUrl(category.name)}
+            className="block min-w-0 flex-shrink-0"
         >
-            {/* Active state indicator - bottom accent line */}
-            {category.active && (
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-sky-500 to-sky-600 rounded-full"></div>
-            )}
-            
-            {/* Category icon with responsive sizing and hover effects */}
-            <div className={`text-xl lg:text-2xl mb-2 transition-all duration-300 ${
-                // Active icon styling: full opacity and enlarged scale
-                category.active 
-                    ? 'opacity-100 transform scale-110' 
-                    // Inactive icon styling: reduced opacity with hover effects
-                    : 'opacity-60 group-hover:opacity-100 group-hover:transform group-hover:scale-105'
-            }`}>
-                {category.icon}
+            {/* Interactive category button with dynamic styling */}
+            <div
+                className={`flex flex-col items-center group pb-3 px-2 rounded-lg transition-all duration-300 relative cursor-pointer ${
+                    // Active state styling with gradient background
+                    category.active
+                        ? 'border-b-2 border-transparent bg-gradient-to-t from-sky-50 to-transparent'
+                        // Inactive state with hover effects
+                        : 'border-b-2 border-transparent hover:bg-gradient-to-t hover:from-sky-50 hover:to-transparent'
+                    }`}
+            >
+                {/* Active state indicator - bottom accent line */}
+                {category.active && (
+                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-0.5 bg-gradient-to-r from-sky-500 to-sky-600 rounded-full"></div>
+                )}
+
+                {/* Category icon with responsive sizing and hover effects */}
+                <div className={`text-xl lg:text-2xl mb-2 transition-all duration-300 ${
+                    // Active icon styling: full opacity and enlarged scale
+                    category.active
+                        ? 'opacity-100 transform scale-110'
+                        // Inactive icon styling: reduced opacity with hover effects
+                        : 'opacity-60 group-hover:opacity-100 group-hover:transform group-hover:scale-105'
+                    }`}>
+                    {category.icon}
+                </div>
+
+                {/* Category name with dynamic styling */}
+                <span className={`text-xs font-medium whitespace-nowrap transition-colors duration-300 ${
+                    // Active text styling: sky color and semibold weight
+                    category.active
+                        ? 'text-sky-800 font-semibold'
+                        // Inactive text styling: gray with hover transition
+                        : 'text-gray-500 group-hover:text-sky-700'
+                    }`}>
+                    {category.name}
+                </span>
             </div>
-            
-            {/* Category name with dynamic styling */}
-            <span className={`text-xs font-medium whitespace-nowrap transition-colors duration-300 ${
-                // Active text styling: sky color and semibold weight
-                category.active 
-                    ? 'text-sky-800 font-semibold' 
-                    // Inactive text styling: gray with hover transition
-                    : 'text-gray-500 group-hover:text-sky-700'
-            }`}>
-                {category.name}
-            </span>
-        </button>
+        </Link>
     );
 };
