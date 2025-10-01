@@ -120,6 +120,7 @@ export default function ListingDetailPage() {
                   src={listing.images[currentImageIndex]}
                   alt={listing.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                 />
                 <div className="absolute bottom-4 left-4 flex space-x-2">
                   {listing.images.map((_: string, index: number) => (
@@ -146,6 +147,7 @@ export default function ListingDetailPage() {
                         src={image}
                         alt={`${listing.title} ${index + 1}`}
                         className="w-full h-full object-cover"
+                        loading="lazy"
                       />
                     </button>
                   ))}

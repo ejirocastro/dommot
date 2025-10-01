@@ -20,7 +20,7 @@
 
 'use client';
 
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { CategoryRow } from './CategoryRow';
 import { LoadMoreButton } from './LoadMoreButton';
 import { Listing, Category } from '../../types';
@@ -63,23 +63,36 @@ export const ListingsGrid: React.FC<ListingsGridProps> = ({
     favorites,
     setFavorites
 }) => {
+    // Progressive category loading - start with 3 categories, load more on demand
+    const [visibleCategoryCount, setVisibleCategoryCount] = useState(3);
+
     /**
      * Transform flat listings array into category-grouped object
-     * Creates efficient lookup structure for category-based rendering
+     * Uses useMemo to avoid expensive recomputation on every render
      */
-    const listingsByCategory = listings.reduce((acc, listing) => {
-        if (!acc[listing.category]) {
-            acc[listing.category] = [];
-        }
-        acc[listing.category].push(listing);
-        return acc;
-    }, {} as Record<string, Listing[]>);
+    const listingsByCategory = useMemo(() => {
+        return listings.reduce((acc, listing) => {
+            if (!acc[listing.category]) {
+                acc[listing.category] = [];
+            }
+            acc[listing.category].push(listing);
+            return acc;
+        }, {} as Record<string, Listing[]>);
+    }, [listings]);
+
+    // Get only visible categories for progressive loading
+    const visibleCategories = categories.slice(0, visibleCategoryCount);
+    const hasMoreCategories = visibleCategoryCount < categories.length;
+
+    const loadMoreCategories = () => {
+        setVisibleCategoryCount(prev => Math.min(prev + 3, categories.length));
+    };
 
     return (
         // Main content container with responsive padding and z-index for layering
         <main className="max-w-7xl mx-auto py-6 lg:py-8 relative z-10">
-            {/* Dynamic category row generation */}
-            {categories.map((category) => {
+            {/* Dynamic category row generation - only visible categories */}
+            {visibleCategories.map((category) => {
                 const categoryListings = listingsByCategory[category.name] || []; // Default to empty array if no listings
                 return (
                     <CategoryRow
@@ -94,11 +107,18 @@ export const ListingsGrid: React.FC<ListingsGridProps> = ({
                     />
                 );
             })}
-            
+
             {/* Load more button section with responsive spacing */}
-            <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
-                <LoadMoreButton />
-            </div>
+            {hasMoreCategories && (
+                <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
+                    <button
+                        onClick={loadMoreCategories}
+                        className="w-full py-4 bg-white hover:bg-sky-50 text-gray-800 font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-sky-100"
+                    >
+                        Show More Categories ({categories.length - visibleCategoryCount} remaining)
+                    </button>
+                </div>
+            )}
         </main>
     );
 };

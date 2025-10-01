@@ -1,23 +1,33 @@
-export interface Listing {
-  id: number;
-  images: string[];
-  title: string;
+import { BaseItem } from './baseItem';
+
+/**
+ * Listing-specific badge types
+ */
+export type BadgeType =
+  | 'Luxury'
+  | 'Superhost'
+  | 'Rare Find'
+  | 'New'
+  | 'Trending'
+  | 'Eco-Friendly'
+  | 'Budget Friendly';
+
+/**
+ * Property listing interface extending BaseItem
+ */
+export interface Listing extends Omit<BaseItem, 'badge'> {
+  /** Distance from user's search location */
   distance: string;
+
+  /** Available date range */
   date: string;
-  price: number;
-  rating: number;
+
+  /** Whether this is marked as a guest favorite */
   isGuestFavorite: boolean;
+
+  /** Listing-specific badge */
   badge: BadgeType;
-  category: string;
-  location: string;
+
+  /** Number of guests the property can accommodate */
   guests: number;
 }
-
-export type BadgeType = 
-  | 'Luxury' 
-  | 'Superhost' 
-  | 'Rare Find' 
-  | 'New' 
-  | 'Trending' 
-  | 'Eco-Friendly' 
-  | 'Budget Friendly';

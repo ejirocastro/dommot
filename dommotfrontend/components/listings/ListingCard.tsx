@@ -22,6 +22,7 @@
 'use client';
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { ListingImage } from './ListingImage';
 import { FavoriteButton } from './FavoriteButton';
 import { ImageIndicators } from './ImageIndicators';
@@ -69,12 +70,18 @@ export const ListingCard: React.FC<ListingCardProps> = ({
     onImagePrev,
     onToggleFavorite
 }) => {
+    const router = useRouter();
+
+    const handleCardClick = () => {
+        router.push(`/listings/${listing.id}`);
+    };
+
     return (
         // Main card container with hover effects and staggered animation timing
         <div
             className="group cursor-pointer transform hover:scale-[1.02] transition-all duration-500"
             style={{ animationDelay: `${index * 100}ms` }} // Staggered entrance animation
-            onClick={() => window.location.href = `/listings/${listing.id}`}
+            onClick={handleCardClick}
         >
             {/* Image section container with overlay elements - reduced margins for compactness */}
             <div className="relative overflow-hidden rounded-xl mb-2 shadow-md hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-400">

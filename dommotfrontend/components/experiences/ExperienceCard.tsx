@@ -1,6 +1,6 @@
 import React from 'react';
 import { Experience } from '@/types';
-import { getExperienceBadgeColor } from '@/utils';
+import { getUnifiedBadgeColor } from '@/utils';
 import ExperienceImage from './ExperienceImage';
 import ExperienceInfo from './ExperienceInfo';
 import { FavoriteButton } from '../listings/FavoriteButton';
@@ -36,7 +36,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
                     currentImageIndex={currentImageIndex}
                     onImageNext={onImageNext}
                     onImagePrev={onImagePrev}
-                    getBadgeColor={getExperienceBadgeColor}
+                    getBadgeColor={(badge) => getUnifiedBadgeColor(badge, 'gradient')}
                 />
                 <FavoriteButton isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
                 <ImageIndicators images={experience.images} currentIndex={currentImageIndex} />

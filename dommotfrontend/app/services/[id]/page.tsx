@@ -112,6 +112,7 @@ export default function ServiceDetailPage() {
                                     src={service.images[currentImageIndex]}
                                     alt={service.title}
                                     className="w-full h-full object-cover"
+                                    loading="lazy"
                                 />
                                 <div className="absolute bottom-4 left-4 flex space-x-2">
                                     {service.images.map((_: string, index: number) => (
@@ -138,6 +139,7 @@ export default function ServiceDetailPage() {
                                                 src={image}
                                                 alt={`${service.title} ${index + 1}`}
                                                 className="w-full h-full object-cover"
+                                                loading="lazy"
                                             />
                                         </button>
                                     ))}

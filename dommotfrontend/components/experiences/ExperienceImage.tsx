@@ -66,6 +66,7 @@ const ExperienceImage: React.FC<ExperienceImageProps> = ({
                 src={experience.images[currentImageIndex]}
                 alt={experience.title}
                 className="w-full aspect-[5/4] object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
             />
 
             {/* Gradient overlay for improved contrast on hover */}

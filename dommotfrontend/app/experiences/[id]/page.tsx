@@ -110,6 +110,7 @@ export default function ExperienceDetailPage() {
                                     src={experience.images[currentImageIndex]}
                                     alt={experience.title}
                                     className="w-full h-full object-cover"
+                                    loading="lazy"
                                 />
                                 <div className="absolute bottom-4 left-4 flex space-x-2">
                                     {experience.images.map((_: string, index: number) => (
@@ -136,6 +137,7 @@ export default function ExperienceDetailPage() {
                                                 src={image}
                                                 alt={`${experience.title} ${index + 1}`}
                                                 className="w-full h-full object-cover"
+                                                loading="lazy"
                                             />
                                         </button>
                                     ))}

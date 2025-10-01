@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { Experience } from '@/types';
 import { FilterOption } from '../../data/experiences';
 import ExperienceCategoryRow from './ExperienceCategoryRow';
@@ -13,6 +13,17 @@ interface ExperienceGridProps {
     setFavorites: React.Dispatch<React.SetStateAction<Set<number>>>;
 }
 
+// Category ID to display name mapping (single source of truth)
+const EXPERIENCE_CATEGORY_MAP: Record<string, string> = {
+    'restaurants': 'Restaurants',
+    'clubs-nightlife': 'Clubs & Nightlife',
+    'adventure-nature': 'Adventure & Nature',
+    'boat-yacht-rentals': 'Boat and Yacht rentals',
+    'food-drink': 'Food & Drink',
+    'entertainment': 'Entertainment',
+    'sports-wellness': 'Sports & Wellness'
+};
+
 const ExperienceGrid: React.FC<ExperienceGridProps> = ({
     experiences,
     categories,
@@ -21,45 +32,41 @@ const ExperienceGrid: React.FC<ExperienceGridProps> = ({
     favorites,
     setFavorites
 }) => {
-    // Group experiences by category
-    const experiencesByCategory = experiences.reduce((acc, experience) => {
-        if (!acc[experience.category]) {
-            acc[experience.category] = [];
-        }
-        acc[experience.category].push(experience);
-        return acc;
-    }, {} as Record<string, Experience[]>);
+    // Progressive category loading - start with 3 categories
+    const [visibleCategoryCount, setVisibleCategoryCount] = useState(3);
+
+    // Group experiences by category - memoized to avoid recalculation
+    const experiencesByCategory = useMemo(() => {
+        return experiences.reduce((acc, experience) => {
+            if (!acc[experience.category]) {
+                acc[experience.category] = [];
+            }
+            acc[experience.category].push(experience);
+            return acc;
+        }, {} as Record<string, Experience[]>);
+    }, [experiences]);
 
     // Get category names (excluding 'All Experiences')
-    const categoryNames = categories.slice(1).map(cat => {
-        const categoryMap: Record<string, string> = {
-            'restaurants': 'Restaurants',
-            'clubs-nightlife': 'Clubs & Nightlife',
-            'adventure-nature': 'Adventure & Nature',
-            'boat-yacht-rentals': 'Boat and Yacht rentals',
-            'food-drink': 'Food & Drink',
-            'entertainment': 'Entertainment',
-            'sports-wellness': 'Sports & Wellness'
-        };
-        return categoryMap[cat.id] || cat.name;
-    });
+    const categoryNames = useMemo(() => {
+        return categories.slice(1).map(cat =>
+            EXPERIENCE_CATEGORY_MAP[cat.id] || cat.name
+        );
+    }, [categories]);
+
+    const visibleCategoryNames = categoryNames.slice(0, visibleCategoryCount);
+    const hasMoreCategories = visibleCategoryCount < categoryNames.length;
+
+    const loadMoreCategories = () => {
+        setVisibleCategoryCount(prev => Math.min(prev + 3, categoryNames.length));
+    };
 
     return (
         <main className="max-w-7xl mx-auto py-6 lg:py-8 relative z-10">
-            {categoryNames.map((categoryName) => {
+            {visibleCategoryNames.map((categoryName) => {
                 const categoryExperiences = experiencesByCategory[categoryName] || [];
-                const categoryInfo = categories.find(cat => {
-                    const categoryMap: Record<string, string> = {
-                        'restaurants': 'Restaurants',
-                        'clubs-nightlife': 'Clubs & Nightlife',
-                        'adventure-nature': 'Adventure & Nature',
-                        'boat-yacht-rentals': 'Boat and Yacht rentals',
-                        'food-drink': 'Food & Drink',
-                        'entertainment': 'Entertainment',
-                        'sports-wellness': 'Sports & Wellness'
-                    };
-                    return categoryMap[cat.id] === categoryName;
-                });
+                const categoryInfo = categories.find(cat =>
+                    EXPERIENCE_CATEGORY_MAP[cat.id] === categoryName
+                );
 
                 return (
                     <ExperienceCategoryRow
@@ -74,9 +81,17 @@ const ExperienceGrid: React.FC<ExperienceGridProps> = ({
                     />
                 );
             })}
-            <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
-                <LoadMoreButton />
-            </div>
+
+            {hasMoreCategories && (
+                <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
+                    <button
+                        onClick={loadMoreCategories}
+                        className="w-full py-4 bg-white hover:bg-sky-50 text-gray-800 font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-sky-100"
+                    >
+                        Show More Categories ({categoryNames.length - visibleCategoryCount} remaining)
+                    </button>
+                </div>
+            )}
         </main>
     );
 };

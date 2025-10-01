@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { OnlineService, OnlineCategory } from '@/types';
 import ServiceCategoryRow from './ServiceCategoryRow';
 import { LoadMoreButton } from '../listings/LoadMoreButton';
@@ -20,18 +20,30 @@ const ServicesGrid: React.FC<ServicesGridProps> = ({
     favorites,
     setFavorites
 }) => {
-    // Group services by category
-    const servicesByCategory = services.reduce((acc, service) => {
-        if (!acc[service.category]) {
-            acc[service.category] = [];
-        }
-        acc[service.category].push(service);
-        return acc;
-    }, {} as Record<string, OnlineService[]>);
+    // Progressive category loading - start with 3 categories
+    const [visibleCategoryCount, setVisibleCategoryCount] = useState(3);
+
+    // Group services by category - memoized to avoid recalculation
+    const servicesByCategory = useMemo(() => {
+        return services.reduce((acc, service) => {
+            if (!acc[service.category]) {
+                acc[service.category] = [];
+            }
+            acc[service.category].push(service);
+            return acc;
+        }, {} as Record<string, OnlineService[]>);
+    }, [services]);
+
+    const visibleCategories = categories.slice(0, visibleCategoryCount);
+    const hasMoreCategories = visibleCategoryCount < categories.length;
+
+    const loadMoreCategories = () => {
+        setVisibleCategoryCount(prev => Math.min(prev + 3, categories.length));
+    };
 
     return (
         <main className="max-w-7xl mx-auto py-6 lg:py-8 relative z-10">
-            {categories.map((category) => {
+            {visibleCategories.map((category) => {
                 const categoryServices = servicesByCategory[category.name] || [];
                 return (
                     <ServiceCategoryRow
@@ -46,9 +58,17 @@ const ServicesGrid: React.FC<ServicesGridProps> = ({
                     />
                 );
             })}
-            <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
-                <LoadMoreButton />
-            </div>
+
+            {hasMoreCategories && (
+                <div className="mt-8 lg:mt-12 px-4 sm:px-6 lg:px-8">
+                    <button
+                        onClick={loadMoreCategories}
+                        className="w-full py-4 bg-white hover:bg-sky-50 text-gray-800 font-semibold rounded-xl shadow-md hover:shadow-lg transition-all duration-300 border border-sky-100"
+                    >
+                        Show More Categories ({categories.length - visibleCategoryCount} remaining)
+                    </button>
+                </div>
+            )}
         </main>
     );
 };

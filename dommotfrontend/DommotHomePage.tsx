@@ -19,18 +19,24 @@
 'use client';
 
 import React, { useState } from 'react';
+import dynamic from 'next/dynamic';
 import {
     Header,
     CategoriesSection,
     ListingsGrid,
     Footer,
     MobileMenu,
-    AnimatedBackground,
-    ChatAssistant
+    AnimatedBackground
 } from './components';
 import { useScrollPosition } from './hooks';
 import { categories, listings } from './data';
 import { SearchData } from './types';
+
+// Code split heavy ChatAssistant component - load only when needed
+const ChatAssistant = dynamic(() => import('./components/chat/ChatAssistant'), {
+    ssr: false, // Don't render on server
+    loading: () => null // No loading indicator needed for chat
+});
 
 /**
  * DommotHomePage - Main home page component
@@ -67,7 +73,7 @@ const DommotHomePage: React.FC = () => {
 
     return (
         /* Main container with gradient background and responsive layout */
-        <div className="min-h-screen bg-gradient-to-br from-white via-sky-50 to-sky-100 relative overflow-hidden">
+        <div className="min-h-screen bg-gradient-to-br from-white via-sky-50 to-sky-100 relative">
             {/* Animated background effects for visual enhancement */}
             <AnimatedBackground />
 

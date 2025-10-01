@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
 import { Header } from '@/components/header';
 import { ListingsGrid } from '@/components/listings';
 import { AnimatedBackground } from '@/components/common';
@@ -9,6 +10,7 @@ import { listings, categories } from '@/data';
 import { SearchData } from '@/types';
 
 export default function SearchPage() {
+  const router = useRouter();
   const scrollY = useScrollPosition();
   const [activeTab, setActiveTab] = useState('Stays');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -148,8 +150,8 @@ export default function SearchPage() {
                   </span>
                 )}
                 
-                <button 
-                  onClick={() => window.location.href = '/'}
+                <button
+                  onClick={() => router.push('/')}
                   className="text-sky-600 hover:text-sky-800 text-sm font-medium"
                 >
                   Clear all filters
@@ -191,7 +193,7 @@ export default function SearchPage() {
                 ].map((destination) => (
                   <button
                     key={destination}
-                    onClick={() => window.location.href = `/search?where=${encodeURIComponent(destination)}`}
+                    onClick={() => router.push(`/search?where=${encodeURIComponent(destination)}`)}
                     className="p-3 bg-sky-50 hover:bg-sky-100 rounded-lg border border-sky-200 hover:border-sky-300 transition-colors text-sky-700 hover:text-sky-800 font-medium"
                   >
                     {destination}
@@ -207,7 +209,7 @@ export default function SearchPage() {
                   Browse All Stays
                 </a>
                 <button
-                  onClick={() => window.location.href = '/search'}
+                  onClick={() => router.push('/search')}
                   className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-lg text-gray-700 bg-white hover:bg-gray-50 transition-colors"
                 >
                   Clear Search

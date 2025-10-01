@@ -22,7 +22,7 @@
 import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Listing, BadgeType } from '../../types';
-import { getBadgeColor } from '../../utils';
+import { getUnifiedBadgeColor } from '../../utils';
 
 /**
  * ListingImageProps - Props interface for the ListingImage component
@@ -64,13 +64,14 @@ export const ListingImage: React.FC<ListingImageProps> = ({
                 src={listing.images[currentImageIndex]}
                 alt={listing.title}
                 className="w-full aspect-[5/4] object-cover group-hover:scale-105 transition-transform duration-500"
+                loading="lazy"
             />
 
             {/* Gradient overlay for improved contrast on hover */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
             {/* Property type badge with dynamic color coding - smaller for compact design */}
-            <div className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-medium shadow-md backdrop-blur-sm ${getBadgeColor(listing.badge)}`}>
+            <div className={`absolute top-2 left-2 px-2 py-0.5 rounded-full text-xs font-medium shadow-md backdrop-blur-sm ${getUnifiedBadgeColor(listing.badge, 'gradient')}`}>
                 {listing.badge}
             </div>
 

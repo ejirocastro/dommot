@@ -23,7 +23,8 @@ import {
     Header,
     Footer,
     MobileMenu,
-    AnimatedBackground
+    AnimatedBackground,
+    ChatAssistant
 } from '@/components';
 import {
     ServiceGrid,
@@ -104,6 +105,9 @@ const OnlineExperiencesPage: React.FC = () => {
                 mobileMenuOpen={mobileMenuOpen}
                 setMobileMenuOpen={setMobileMenuOpen}
             />
+
+            {/* AI Chat Assistant */}
+            <ChatAssistant />
         </div>
     );
 };

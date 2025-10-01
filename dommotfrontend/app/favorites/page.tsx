@@ -285,6 +285,7 @@ export default function FavoritesPage() {
                                         src={item.image}
                                         alt={item.title}
                                         className="w-full h-full object-cover"
+                                        loading="lazy"
                                     />
                                     <button
                                         onClick={() => removeFavorite(item.id, item.type)}

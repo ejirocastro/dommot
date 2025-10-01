@@ -1,6 +1,6 @@
 import React from 'react';
 import { OnlineService } from '@/types';
-import { getOnlineBadgeColor } from '@/utils';
+import { getUnifiedBadgeColor } from '@/utils';
 import ServiceImage from './ServiceImage';
 import ServiceInfo from './ServiceInfo';
 import { FavoriteButton } from '../listings/FavoriteButton';
@@ -38,7 +38,7 @@ const ServiceCard: React.FC<ServiceCardProps> = ({
                     currentImageIndex={currentImageIndex}
                     onImageNext={onImageNext}
                     onImagePrev={onImagePrev}
-                    getBadgeColor={getOnlineBadgeColor}
+                    getBadgeColor={(badge) => getUnifiedBadgeColor(badge, 'gradient')}
                 />
                 <FavoriteButton isFavorite={isFavorite} onToggleFavorite={onToggleFavorite} />
                 <ImageIndicators images={service.images} currentIndex={currentImageIndex} />
