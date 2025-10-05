@@ -62,7 +62,7 @@ export const ListingImage: React.FC<ListingImageProps> = ({
             {/* Main property image with hover zoom effect - reduced aspect ratio for compactness */}
             <img
                 src={listing.images[currentImageIndex]}
-                alt={listing.title}
+                alt={`${listing.title} - Image ${currentImageIndex + 1} of ${listing.images.length}`}
                 className="w-full aspect-[5/4] object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
             />

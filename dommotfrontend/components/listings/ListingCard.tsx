@@ -78,10 +78,19 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 
     return (
         // Main card container with hover effects and staggered animation timing
-        <div
+        <article
             className="group cursor-pointer transform hover:scale-[1.02] transition-all duration-500"
             style={{ animationDelay: `${index * 100}ms` }} // Staggered entrance animation
             onClick={handleCardClick}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleCardClick();
+                }
+            }}
+            aria-label={`View ${listing.title} - ${listing.price} per night`}
         >
             {/* Image section container with overlay elements - reduced margins for compactness */}
             <div className="relative overflow-hidden rounded-xl mb-2 shadow-md hover:shadow-xl hover:shadow-sky-500/20 transition-all duration-400">
@@ -102,6 +111,6 @@ export const ListingCard: React.FC<ListingCardProps> = ({
 
             {/* Property information section below image */}
             <ListingInfo listing={listing} />
-        </div>
+        </article>
     );
 };

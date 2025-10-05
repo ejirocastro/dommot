@@ -21,7 +21,7 @@ const EkoAtlanticStaysPage: React.FC = () => {
         return listings.filter(listing =>
             listing.category === "Stays in Eko Atlantic" ||
             listing.title.toLowerCase().includes('eko atlantic') ||
-            listing.location.toLowerCase().includes('eko atlantic')
+            listing.location?.toLowerCase().includes('eko atlantic')
         );
     }, []);
 

@@ -34,7 +34,7 @@ const VictoriaIslandStaysPage: React.FC = () => {
         return listings.filter(listing =>
             listing.category === "Stays in Victoria Island" ||
             listing.title.toLowerCase().includes('victoria island') ||
-            listing.location.toLowerCase().includes('victoria island')
+            listing.location?.toLowerCase().includes('victoria island')
         );
     }, []);
 

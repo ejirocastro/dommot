@@ -2,6 +2,7 @@ export interface OnlineService {
     id: number;
     title: string;
     category: string;
+    location?: string;
     description: string;
     price: number;
     currency: string;

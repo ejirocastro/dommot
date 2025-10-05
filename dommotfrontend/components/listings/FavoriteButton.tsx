@@ -50,6 +50,8 @@ export const FavoriteButton: React.FC<FavoriteButtonProps> = ({ isFavorite, onTo
         // Absolute positioned button with glass morphism background and scale animations
         <button
             onClick={onToggleFavorite}
+            aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+            aria-pressed={isFavorite}
             className="absolute top-3 right-3 p-2 hover:scale-125 transition-all duration-300 bg-white/20 backdrop-blur-sm rounded-full"
         >
             {/* Heart icon with dynamic styling based on favorite state */}

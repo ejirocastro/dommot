@@ -29,18 +29,20 @@ import { UserMenu } from './UserMenu';
 
 /**
  * TopNavigationProps - Props interface for the TopNavigation component
- * 
+ *
  * @interface TopNavigationProps
  * @property {string} activeTab - Currently active navigation tab identifier
  * @property {function} setActiveTab - State setter for updating the active tab
  * @property {boolean} mobileMenuOpen - Current state of mobile menu visibility
  * @property {function} setMobileMenuOpen - State setter for mobile menu toggle
+ * @property {function} onOpenAuthModal - Callback to open auth modal with specified mode
  */
 interface TopNavigationProps {
     activeTab: string;
     setActiveTab: React.Dispatch<React.SetStateAction<string>>;
     mobileMenuOpen: boolean;
     setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    onOpenAuthModal?: (mode: 'login' | 'signup') => void;
 }
 
 /**
@@ -57,7 +59,8 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
     activeTab,
     setActiveTab,
     mobileMenuOpen,
-    setMobileMenuOpen
+    setMobileMenuOpen,
+    onOpenAuthModal
 }) => {
     // Get current pathname for active tab detection
     const pathname = usePathname();
@@ -103,12 +106,13 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
             <Logo />
 
             {/* Center Navigation Tabs - Desktop only with glass morphism effect */}
-            <div className="hidden lg:flex items-center bg-white/70 backdrop-blur-md rounded-full p-1.5 border border-sky-200/50 shadow-lg">
+            <nav className="hidden lg:flex items-center bg-white/70 backdrop-blur-md rounded-full p-1.5 border border-sky-200/50 shadow-lg" aria-label="Main navigation">
                 {/* Dynamic tab generation with routing and active state management */}
                 {['stays', 'experiences', 'online'].map((tab) => (
                     <Link
                         key={tab}
                         href={getTabHref(tab)}
+                        aria-current={isActiveTab(tab) ? 'page' : undefined}
                         className={`px-6 py-2.5 text-sm font-medium rounded-full transition-all duration-300 capitalize relative ${
                             // Active tab styling with gradient and scale transform
                             isActiveTab(tab)
@@ -127,33 +131,36 @@ export const TopNavigation: React.FC<TopNavigationProps> = ({
                         )}
                     </Link>
                 ))}
-            </div>
+            </nav>
 
             {/* Right Menu Section - User controls and actions */}
             <div className="flex items-center space-x-2 lg:space-x-3">
                 {/* Host promotion button - Extra large screens only */}
-                <button className="hidden xl:flex items-center space-x-2 text-sm font-medium text-sky-800 hover:bg-sky-50 px-4 py-2.5 rounded-full transition-all duration-300 border border-transparent hover:border-sky-200 hover:shadow-lg group">
+                <button aria-label="List your home on Dommot" className="hidden xl:flex items-center space-x-2 text-sm font-medium text-sky-800 hover:bg-sky-50 px-4 py-2.5 rounded-full transition-all duration-300 border border-transparent hover:border-sky-200 hover:shadow-lg group">
                     <span>DOMMOT your home</span>
                     <Zap className="w-4 h-4 group-hover:text-sky-600 transition-colors" />
                 </button>
-                
+
                 {/* Language/Region selector button */}
-                <button className="p-3 hover:bg-sky-50 rounded-full transition-all duration-300 hover:shadow-lg">
+                <button aria-label="Select language and region" className="p-3 hover:bg-sky-50 rounded-full transition-all duration-300 hover:shadow-lg">
                     <Globe className="w-5 h-5 text-sky-700" />
                 </button>
 
                 {/* Mobile menu toggle button - Mobile only */}
                 <button
                     onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+                    aria-expanded={mobileMenuOpen}
                     className="lg:hidden p-3 hover:bg-sky-50 rounded-full transition-all duration-300 hover:shadow-lg"
                 >
                     <Menu className="w-5 h-5 text-sky-700" />
                 </button>
                 
                 {/* User dropdown menu */}
-                <UserMenu 
-                    isOpen={userMenuOpen} 
-                    setIsOpen={setUserMenuOpen} 
+                <UserMenu
+                    isOpen={userMenuOpen}
+                    setIsOpen={setUserMenuOpen}
+                    onOpenAuthModal={onOpenAuthModal}
                 />
             </div>
         </div>

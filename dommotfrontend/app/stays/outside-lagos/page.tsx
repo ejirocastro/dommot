@@ -20,7 +20,7 @@ const OutsideLagosStaysPage: React.FC = () => {
     const outsideLagosListings = useMemo(() => {
         return listings.filter(listing =>
             listing.category === "Outside Lagos" ||
-            !listing.location.toLowerCase().includes('lagos')
+            !listing.location?.toLowerCase().includes('lagos')
         );
     }, []);
 

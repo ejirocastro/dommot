@@ -29,7 +29,12 @@ export type AllBadgeTypes =
     | 'Popular'
     | 'Limited Slots'
     | 'Best Value'
-    | 'Local Favorite';
+    | 'Local Favorite'
+    | 'bestseller'
+    | 'pro'
+    | 'new'
+    | 'featured'
+    | 'choice';
 
 /**
  * Base interface for all browsable items
@@ -46,7 +51,7 @@ export interface BaseItem {
     title: string;
 
     /** Physical or virtual location */
-    location: string;
+    location?: string;
 
     /** Category classification */
     category: string;

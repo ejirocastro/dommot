@@ -3,6 +3,8 @@
  * Handles token management, expiration checking, and automatic logout
  */
 
+import { AuthenticationError, handleError } from './errorHandler';
+
 export interface UserData {
   email: string;
   loginTime?: number;
@@ -11,25 +13,40 @@ export interface UserData {
 
 /**
  * Set authentication data with expiration
+ * @throws {AuthenticationError} If localStorage is not available or data cannot be saved
  */
 export const setAuthData = (userData: { email: string }, expiresInHours: number = 24): void => {
-  const now = Date.now();
-  const expiresAt = now + (expiresInHours * 60 * 60 * 1000); // Convert hours to milliseconds
-  
-  const authData: UserData = {
-    ...userData,
-    loginTime: now,
-    expiresAt
-  };
+  try {
+    if (typeof window === 'undefined' || !window.localStorage) {
+      throw new AuthenticationError(
+        'localStorage not available',
+        'Unable to save authentication data. Please enable cookies and try again.'
+      );
+    }
 
-  // Set in localStorage with expiration
-  localStorage.setItem('user', JSON.stringify(authData));
-  
-  // Set cookie with same expiration
-  const maxAge = expiresInHours * 60 * 60; // Convert to seconds for cookie
-  document.cookie = `auth-token=demo-token; path=/; max-age=${maxAge}; SameSite=Strict`;
-  
-  console.log('Auth data set:', { authData, expiresAt: new Date(expiresAt) });
+    const now = Date.now();
+    const expiresAt = now + (expiresInHours * 60 * 60 * 1000); // Convert hours to milliseconds
+
+    const authData: UserData = {
+      ...userData,
+      loginTime: now,
+      expiresAt
+    };
+
+    // Set in localStorage with expiration
+    localStorage.setItem('user', JSON.stringify(authData));
+
+    // Set cookie with same expiration
+    const maxAge = expiresInHours * 60 * 60; // Convert to seconds for cookie
+    document.cookie = `auth-token=demo-token; path=/; max-age=${maxAge}; SameSite=Strict`;
+
+    console.log('Auth data set:', { authData, expiresAt: new Date(expiresAt) });
+  } catch (error) {
+    if (error instanceof AuthenticationError) {
+      throw error;
+    }
+    throw handleError(error, { context: 'setAuthData', userData });
+  }
 };
 
 /**
@@ -54,7 +71,7 @@ export const getAuthData = (): UserData | null => {
 
     return userData;
   } catch (error) {
-    console.error('Error reading auth data:', error);
+    handleError(error, { context: 'getAuthData' });
     clearAuthData();
     return null;
   }
@@ -72,19 +89,28 @@ export const isAuthenticated = (): boolean => {
  * Clear all authentication data
  */
 export const clearAuthData = (): void => {
-  // Clear localStorage
-  localStorage.removeItem('user');
-  
-  // Clear all possible auth cookies
-  const hostname = typeof window !== 'undefined' ? window.location.hostname : '';
-  document.cookie = `auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=${hostname}`;
-  document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
-  
-  console.log('Auth data cleared');
-  
-  // Dispatch event to update UI
-  if (typeof window !== 'undefined') {
-    window.dispatchEvent(new Event('authStateChange'));
+  try {
+    // Clear localStorage
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.removeItem('user');
+    }
+
+    // Clear all possible auth cookies
+    if (typeof window !== 'undefined' && document) {
+      const hostname = window.location.hostname;
+      document.cookie = `auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT; domain=${hostname}`;
+      document.cookie = 'auth-token=; path=/; expires=Thu, 01 Jan 1970 00:00:00 GMT';
+    }
+
+    console.log('Auth data cleared');
+
+    // Dispatch event to update UI
+    if (typeof window !== 'undefined') {
+      window.dispatchEvent(new Event('authStateChange'));
+    }
+  } catch (error) {
+    // Log but don't throw - clearing auth data should always succeed
+    handleError(error, { context: 'clearAuthData', severity: 'low' });
   }
 };
 

@@ -26,7 +26,7 @@ import { SearchData } from '../../types';
 
 /**
  * HeaderProps - Props interface for the Header component
- * 
+ *
  * @interface HeaderProps
  * @property {number} scrollY - Current vertical scroll position for dynamic styling
  * @property {string} activeTab - Currently active navigation tab identifier
@@ -35,6 +35,7 @@ import { SearchData } from '../../types';
  * @property {function} setSearchData - State setter for updating search data
  * @property {boolean} mobileMenuOpen - Mobile menu visibility state
  * @property {function} setMobileMenuOpen - State setter for mobile menu visibility
+ * @property {function} onOpenAuthModal - Callback to open auth modal with specified mode
  */
 interface HeaderProps {
     scrollY: number;
@@ -44,6 +45,7 @@ interface HeaderProps {
     setSearchData: React.Dispatch<React.SetStateAction<SearchData>>;
     mobileMenuOpen: boolean;
     setMobileMenuOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    onOpenAuthModal?: (mode: 'login' | 'signup') => void;
 }
 
 /**
@@ -63,11 +65,12 @@ export const Header: React.FC<HeaderProps> = ({
     searchData,
     setSearchData,
     mobileMenuOpen,
-    setMobileMenuOpen
+    setMobileMenuOpen,
+    onOpenAuthModal
 }) => {
     return (
         /* Main header element with sticky positioning and dynamic styling */
-        <header className={`sticky top-0 z-50 transition-all duration-300 ${
+        <header role="banner" className={`sticky top-0 z-50 transition-all duration-300 ${
             // Dynamic styling based on scroll position for enhanced visual feedback
             scrollY > 20
                 ? 'bg-white/95 backdrop-blur-xl border-b border-sky-200/50 shadow-2xl'  // Scrolled state - more opaque with stronger shadow
@@ -81,6 +84,7 @@ export const Header: React.FC<HeaderProps> = ({
                     setActiveTab={setActiveTab}
                     mobileMenuOpen={mobileMenuOpen}
                     setMobileMenuOpen={setMobileMenuOpen}
+                    onOpenAuthModal={onOpenAuthModal}
                 />
                 
                 {/* Mobile-only navigation tabs for improved touch navigation */}

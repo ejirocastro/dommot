@@ -99,6 +99,33 @@ const BADGE_COLOR_MAP: Record<AllBadgeTypes, BadgeColorConfig> = {
         solid: 'bg-green-600 text-white',
         outlined: 'bg-emerald-100 text-emerald-800 border border-emerald-200',
     },
+
+    // Online service badges
+    'bestseller': {
+        gradient: 'bg-gradient-to-r from-yellow-500 to-amber-600 text-white',
+        solid: 'bg-amber-600 text-white',
+        outlined: 'bg-amber-100 text-amber-800 border border-amber-200',
+    },
+    'pro': {
+        gradient: 'bg-gradient-to-r from-blue-600 to-indigo-700 text-white',
+        solid: 'bg-blue-700 text-white',
+        outlined: 'bg-blue-100 text-blue-800 border border-blue-200',
+    },
+    'new': {
+        gradient: 'bg-gradient-to-r from-green-500 to-emerald-600 text-white',
+        solid: 'bg-green-600 text-white',
+        outlined: 'bg-green-100 text-green-800 border border-green-200',
+    },
+    'featured': {
+        gradient: 'bg-gradient-to-r from-purple-600 to-pink-600 text-white',
+        solid: 'bg-purple-600 text-white',
+        outlined: 'bg-purple-100 text-purple-800 border border-purple-200',
+    },
+    'choice': {
+        gradient: 'bg-gradient-to-r from-rose-500 to-red-600 text-white',
+        solid: 'bg-rose-600 text-white',
+        outlined: 'bg-rose-100 text-rose-800 border border-rose-200',
+    },
 };
 
 /**

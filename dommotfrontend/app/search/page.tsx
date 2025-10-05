@@ -57,7 +57,7 @@ export default function SearchPage() {
         // Filter by location/destination
         if (location) {
           filtered = filtered.filter(listing => {
-            const matchesLocation = listing.location.toLowerCase().includes(location.toLowerCase());
+            const matchesLocation = listing.location?.toLowerCase().includes(location.toLowerCase()) ?? false;
             const matchesTitle = listing.title.toLowerCase().includes(location.toLowerCase());
             const matchesCategory = listing.category.toLowerCase().includes(location.toLowerCase());
             

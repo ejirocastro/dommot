@@ -20,13 +20,13 @@ const OtherLagosStaysPage: React.FC = () => {
     const otherLagosListings = useMemo(() => {
         return listings.filter(listing =>
             listing.category === "Other Lagos Areas" ||
-            (listing.location.toLowerCase().includes('lagos') &&
-                !listing.location.toLowerCase().includes('lekki') &&
-                !listing.location.toLowerCase().includes('victoria island') &&
-                !listing.location.toLowerCase().includes('ikoyi') &&
-                !listing.location.toLowerCase().includes('banana island') &&
-                !listing.location.toLowerCase().includes('eko atlantic') &&
-                !listing.location.toLowerCase().includes('maryland'))
+            (listing.location?.toLowerCase().includes('lagos') &&
+                !listing.location?.toLowerCase().includes('lekki') &&
+                !listing.location?.toLowerCase().includes('victoria island') &&
+                !listing.location?.toLowerCase().includes('ikoyi') &&
+                !listing.location?.toLowerCase().includes('banana island') &&
+                !listing.location?.toLowerCase().includes('eko atlantic') &&
+                !listing.location?.toLowerCase().includes('maryland'))
         );
     }, []);
 

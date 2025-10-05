@@ -7,3 +7,4 @@ export * from './common';
 export * from './onlineServices';
 export * from './chat';
 export * from './experiences';
+export * from './auth';

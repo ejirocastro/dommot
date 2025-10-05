@@ -21,7 +21,7 @@ const MarylandStaysPage: React.FC = () => {
         return listings.filter(listing =>
             listing.category === "Stays in Maryland" ||
             listing.title.toLowerCase().includes('maryland') ||
-            listing.location.toLowerCase().includes('maryland')
+            listing.location?.toLowerCase().includes('maryland')
         );
     }, []);
 

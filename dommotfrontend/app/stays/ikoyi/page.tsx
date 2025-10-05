@@ -34,7 +34,7 @@ const IkoyiStaysPage: React.FC = () => {
         return listings.filter(listing =>
             listing.category === "Stays in Ikoyi" ||
             listing.title.toLowerCase().includes('ikoyi') ||
-            listing.location.toLowerCase().includes('ikoyi')
+            listing.location?.toLowerCase().includes('ikoyi')
         );
     }, []);
 

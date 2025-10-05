@@ -43,23 +43,28 @@ export const SearchField: React.FC<SearchFieldProps> = ({
     onChange,
     hasBorder
 }) => {
+    // Generate unique ID for label association
+    const fieldId = `search-${label.toLowerCase().replace(/\s+/g, '-')}`;
+
     return (
         /* Field container with hover effects and conditional border */
         <div className={`w-full px-6 py-4 hover:bg-sky-50/50 transition-all duration-300 group ${
             hasBorder ? 'border-r border-sky-100/50' : '' // Optional right border for field separation
         }`}>
             {/* Field label with hover color transition */}
-            <div className="text-xs font-semibold text-sky-800 mb-1 group-hover:text-sky-700 transition-colors">
+            <label htmlFor={fieldId} className="text-xs font-semibold text-sky-800 mb-1 group-hover:text-sky-700 transition-colors block">
                 {label}
-            </div>
-            
+            </label>
+
             {/* Main input field with transparent background */}
             <input
+                id={fieldId}
                 type="text"
                 placeholder={placeholder}
                 className="w-full text-sm text-gray-700 placeholder-gray-400 bg-transparent outline-none font-medium"
                 value={value}
                 onChange={onChange}
+                aria-label={label}
             />
         </div>
     );

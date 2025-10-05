@@ -34,7 +34,7 @@ const BananaIslandStaysPage: React.FC = () => {
         return listings.filter(listing =>
             listing.category === "Stays in Banana Island" ||
             listing.title.toLowerCase().includes('banana island') ||
-            listing.location.toLowerCase().includes('banana island')
+            listing.location?.toLowerCase().includes('banana island')
         );
     }, []);
 

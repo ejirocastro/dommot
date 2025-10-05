@@ -64,7 +64,7 @@ const ExperienceImage: React.FC<ExperienceImageProps> = ({
             {/* Main experience image with hover zoom effect - reduced aspect ratio for compactness */}
             <img
                 src={experience.images[currentImageIndex]}
-                alt={experience.title}
+                alt={`${experience.title} - Image ${currentImageIndex + 1} of ${experience.images.length}`}
                 className="w-full aspect-[5/4] object-cover group-hover:scale-105 transition-transform duration-500"
                 loading="lazy"
             />

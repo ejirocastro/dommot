@@ -89,7 +89,7 @@ export default function CategoryPage({ params }: CategoryPageProps) {
       
       filtered = listings.filter(listing => {
         const matchesCategory = listing.category.toLowerCase().includes(reconstructedCategoryName.toLowerCase());
-        const matchesLocation = listing.location.toLowerCase().includes(areaName);
+        const matchesLocation = listing.location?.toLowerCase().includes(areaName) ?? false;
         const matchesTitle = listing.title.toLowerCase().includes(areaName);
         
         return matchesCategory || matchesLocation || matchesTitle;

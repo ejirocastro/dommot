@@ -26,7 +26,8 @@ import {
     ListingsGrid,
     Footer,
     MobileMenu,
-    AnimatedBackground
+    AnimatedBackground,
+    AuthModal
 } from './components';
 import { useScrollPosition } from './hooks';
 import { categories, listings } from './data';
@@ -68,8 +69,18 @@ const DommotHomePage: React.FC = () => {
     // Mobile navigation state - controls visibility of mobile hamburger menu
     const [mobileMenuOpen, setMobileMenuOpen] = useState<boolean>(false);
 
+    // Auth modal state - controls visibility and mode of authentication modal
+    const [authModalOpen, setAuthModalOpen] = useState<boolean>(false);
+    const [authModalMode, setAuthModalMode] = useState<'login' | 'signup'>('login');
+
     // Custom hook to track scroll position for dynamic header styling
     const scrollY = useScrollPosition();
+
+    // Handler to open auth modal with specified mode
+    const handleOpenAuthModal = (mode: 'login' | 'signup') => {
+        setAuthModalMode(mode);
+        setAuthModalOpen(true);
+    };
 
     return (
         /* Main container with gradient background and responsive layout */
@@ -86,20 +97,23 @@ const DommotHomePage: React.FC = () => {
                 setSearchData={setSearchData}
                 mobileMenuOpen={mobileMenuOpen}
                 setMobileMenuOpen={setMobileMenuOpen}
+                onOpenAuthModal={handleOpenAuthModal}
             />
 
             {/* Category filter section with horizontal scrolling tabs */}
             <CategoriesSection scrollY={scrollY} categories={categories} />
 
             {/* Main property listings grid with horizontal scrolling rows */}
-            <ListingsGrid
-                listings={listings}
-                categories={categories}
-                currentImageIndex={currentImageIndex}
-                setCurrentImageIndex={setCurrentImageIndex}
-                favorites={favorites}
-                setFavorites={setFavorites}
-            />
+            <main id="main-content">
+                <ListingsGrid
+                    listings={listings}
+                    categories={categories}
+                    currentImageIndex={currentImageIndex}
+                    setCurrentImageIndex={setCurrentImageIndex}
+                    favorites={favorites}
+                    setFavorites={setFavorites}
+                />
+            </main>
 
             {/* Site footer with links and information */}
             <Footer />
@@ -112,6 +126,13 @@ const DommotHomePage: React.FC = () => {
 
             {/* AI Chat Assistant */}
             <ChatAssistant />
+
+            {/* Auth Modal for login/signup */}
+            <AuthModal
+                isOpen={authModalOpen}
+                onClose={() => setAuthModalOpen(false)}
+                initialMode={authModalMode}
+            />
         </div>
     );
 };

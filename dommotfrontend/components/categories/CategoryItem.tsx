@@ -71,6 +71,8 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({ category }) => {
         // Navigation link wrapping the category button
         <Link
             href={getCategoryUrl(category.name)}
+            aria-current={category.active ? 'page' : undefined}
+            aria-label={`Filter by ${category.name}`}
             className="block min-w-0 flex-shrink-0"
         >
             {/* Interactive category button with dynamic styling */}

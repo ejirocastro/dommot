@@ -22,19 +22,21 @@
 import React, { useRef, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Menu, User, Heart, Plane, MessageSquare, UserCircle, Settings, Home, UserPlus, HelpCircle, LogOut } from 'lucide-react';
+import { Menu, User, Heart, Plane, MessageSquare, UserCircle, Settings, Home, UserPlus, HelpCircle, LogOut, LayoutDashboard } from 'lucide-react';
 import { isAuthenticated, clearAuthData, checkAndAutoLogout } from '../../utils/auth';
 
 /**
  * UserMenuProps - Props interface for the UserMenu component
- * 
+ *
  * @interface UserMenuProps
  * @property {boolean} isOpen - Controls visibility of the dropdown menu
  * @property {function} setIsOpen - State setter for toggling menu visibility
+ * @property {function} onOpenAuthModal - Callback to open auth modal with specified mode
  */
 interface UserMenuProps {
     isOpen: boolean;
     setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    onOpenAuthModal?: (mode: 'login' | 'signup') => void;
 }
 
 /**
@@ -47,7 +49,7 @@ interface UserMenuProps {
  * @param {UserMenuProps} props - Component props containing dropdown state and handlers
  * @returns {JSX.Element} Rendered user menu component with dropdown
  */
-export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
+export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen, onOpenAuthModal }) => {
     const dropdownRef = useRef<HTMLDivElement>(null);
     const buttonRef = useRef<HTMLButtonElement>(null);
     const router = useRouter();
@@ -160,7 +162,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
     const getMenuItems = (): Array<{
         icon: React.ComponentType<{ className?: string }>;
         label: string;
-        href: string;
+        href?: string;
         divider?: boolean;
         danger?: boolean;
         onClick?: () => void;
@@ -168,8 +170,23 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
         if (!isLoggedIn) {
             // Menu for non-authenticated users
             return [
-                { icon: User, label: 'Sign up', href: '/signup' },
-                { icon: LogOut, label: 'Login', href: '/login', divider: true },
+                {
+                    icon: User,
+                    label: 'Sign up',
+                    onClick: () => {
+                        onOpenAuthModal?.('signup');
+                        setIsOpen(false);
+                    }
+                },
+                {
+                    icon: LogOut,
+                    label: 'Login',
+                    divider: true,
+                    onClick: () => {
+                        onOpenAuthModal?.('login');
+                        setIsOpen(false);
+                    }
+                },
                 { icon: Home, label: 'Become a host', href: '/host', divider: true },
                 { icon: HelpCircle, label: 'Help centre', href: '#' },
             ];
@@ -177,6 +194,9 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
 
         // Menu for authenticated users
         return [
+            // Dashboard Section
+            { icon: LayoutDashboard, label: 'Dashboard', href: '/dashboard' },
+
             // Travel & Booking Section
             { icon: Heart, label: 'Wishlists', href: '#' },
             { icon: Plane, label: 'Trips', href: '#' },
@@ -208,6 +228,9 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
             <button
                 ref={buttonRef}
                 onClick={toggleDropdown}
+                aria-label="User menu"
+                aria-expanded={isOpen}
+                aria-haspopup="true"
                 className="flex items-center space-x-2 border-2 border-sky-200/50 rounded-full p-2 hover:shadow-xl transition-all duration-300 bg-white/80 backdrop-blur-sm hover:border-sky-300"
             >
                 {/* Hamburger menu icon */}
@@ -223,6 +246,8 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
             {isOpen && (
                 <div
                     ref={dropdownRef}
+                    role="menu"
+                    aria-label="User account menu"
                     className="absolute right-0 top-full mt-3 w-60 bg-white/95 backdrop-blur-xl border border-sky-200/30 rounded-3xl shadow-2xl py-3 z-50 animate-in fade-in slide-in-from-top-2 duration-300 ring-1 ring-black/5"
                 >
                     {menuItems.map((item) => {
@@ -234,6 +259,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
                                 )}
                                 {item.onClick ? (
                                     <button
+                                        role="menuitem"
                                         className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer w-full text-left ${item.danger
                                             ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
                                             : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
@@ -249,9 +275,10 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
                                             }`} />
                                         <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
                                     </button>
-                                ) : (
+                                ) : item.href ? (
                                     <Link
                                         href={item.href}
+                                        role="menuitem"
                                         className={`flex items-center space-x-3 mx-2 px-3 py-2.5 text-sm font-medium rounded-xl transition-all duration-300 group cursor-pointer ${item.danger
                                             ? 'text-red-600 hover:text-red-700 hover:bg-red-50/80 hover:shadow-lg hover:shadow-red-100/50 hover:scale-[1.02] transform'
                                             : 'text-gray-700 hover:text-sky-700 hover:bg-sky-50/80 hover:shadow-lg hover:shadow-sky-100/50 hover:scale-[1.02] transform'
@@ -264,7 +291,7 @@ export const UserMenu: React.FC<UserMenuProps> = ({ isOpen, setIsOpen }) => {
                                             }`} />
                                         <span className="group-hover:translate-x-0.5 transition-transform duration-300">{item.label}</span>
                                     </Link>
-                                )}
+                                ) : null}
                             </React.Fragment>
                         );
                     })}
